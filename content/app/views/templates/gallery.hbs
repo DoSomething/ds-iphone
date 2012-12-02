@@ -1,0 +1,43 @@
+<div id="header">
+	<div class="logo">
+		<img src="images/p4plogo.png" />
+	</div> 
+        <div id="refresh-gal" class="box_button_header box_button refresh_button"></div>
+     
+</div>
+
+<div id="gallery_page" class="content_wrapper">
+	<div class="filters_wrapper">
+		<div id="location" class="filter single"></div>
+		<div id="favs" class="filter single"></div>
+		<div id="type" class="filter dog"></div>
+		<div class="type_dropdown" style="display:none">
+			<div id="dog_type"></div>
+			<div id="cat_type"></div>
+			<div id="bird_type"></div>
+			<div id="rabbit_type"></div>
+			<div id="other_type"></div>
+		</div>
+		<div id="time" class="filter single"></div>
+	</div>
+
+	<div id="wrapper" class="scroll_wrapper">
+		<div id="scroller">
+			
+
+			<ul id="thelist">
+					 {{#each pets}}
+					 <li data-id="{{sid}}" class="pet_thumb" style="background-color:#333;background-image:url('{{thumb_retina}}')"></li>
+
+  					 {{/each}}
+
+			</ul>
+			<div id="loadMore">
+				<div class="wide_button green_button active_yellow centered">Load More...</div>
+			</div>
+			<!-- <div id="pullUp">
+				<span class="pullUpIcon"></span><span class="pullUpLabel">Pull up to refresh...</span>
+			</div> -->
+		</div>
+	</div>
+</div>
