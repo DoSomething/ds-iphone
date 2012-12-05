@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<color name="actionbar_separator">#173781</color>
+<color name="actionbar_title">#FFFFFF</color>
+<color name="actionbar_background_start">#173781</color>
+<color name="actionbar_background_end">#173781</color>
+<color name="actionbar_background_item_pressed_start">#2458C9</color>
+<color name="actionbar_background_item_pressed_end">#2458C9</color>
+<color name="login_background_top">#18408B</color>
+<color name="login_background_bottom">#2262AC</color>
+<color name="login_background_inputs_top">#18408B</color>
+<color name="login_background_inputs_bottom">#1E1D1C</color>
+<color name="login_input_background">#333131</color>
+<color name="login_input_text">#999898</color>
+<color name="register_label">#505050</color>
+<color name="light_background">#EFEFEF</color>
+<color name="register_disclaimer_text">#7A7C7F</color>
+<color name="required_instructions_text">#7A7C7F</color>
+<color name="profile_background">#EFEFEF</color>
+<color name="profile_no_campaigns_text">#333333</color>
+<color name="campaign_actions_background">#EFEFEF</color>
+<color name="campaign_dates_row_background">#2A2C2B</color>
+<color name="campaign_sign_up_row_background">#1C1B19</color>
+<color name="campaign_share_text">#fed200</color>
+<color name="campaign_share_inner_background">#1d1d1b</color>
+<color name="campaign_share_outer_background">#1d59a1</color>
+<color name="campaign_button_background">#1d59a1</color>
+<color name="campaign_button_background_active">#164278</color>
+<color name="cause_text">#333333</color>
+<color name="web_form_checkbox_label">#000000</color>
+<color name="campaigns_callout_background">#FF522053</color>
+<color name="campaigns_callout_text">#FFFECC05</color>
+<color name="campaigns_past_campaign_callout_background">#DD868686</color>
+<color name="campaigns_past_campaign_callout_text">#FFEFEFEF</color>
+</resources>

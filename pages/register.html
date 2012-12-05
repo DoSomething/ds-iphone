@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>Register</title>
+  
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body ontouchstart="">
+
+<div id="header">
+	<div class="back_button"></div>
+	<div id="header_title" class="title">Become a Member</div>
+</div>
+
+
+<div id="register_page" class="content_wrapper page">
+	<div id="wrapper" class="scroll_wrapper">
+		<div id="scroller">
+			<form>
+				<div class="label">Username *</div>
+				<input type="text" name="username" />
+				<div class="label">Cell Phone Number</div>
+				<input type="tel" name="phone" />
+				<div class="label">First Name *</div>
+				<input type="text" name="first_name" />
+				<div class="label">Last Name *</div>
+				<input type="text" name="last_name" />
+				<div class="label">Email Address *</div>
+				<input type="email" name="email" />
+				<div class="label">Password *</div>
+				<input type="text" name="password" />
+				<div class="label">Confirm Password *</div>
+				<input type="text" name="password_confirm" />
+				<div class="label">Birthday</div>
+				<input type="date" name="birthday" />
+				<p>By tapping Go, you accept the <a id="terms_link" href="#">terms of use</a> and <a id="privacy_link" href="#">privacy policy</a>.</p>
+				<p>* Required Field</p>
+				<div class="button gray_button active_gray">Cancel</div>
+				<input type="submit" name="register_submit" class="button yellow_button active_yellow" value="Go" />
+				<div class="clear"></div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="js/iscroll.js"></script>
+	<script src="js/script.js"></script>
+
+</body>
+</html>
