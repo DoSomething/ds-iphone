@@ -36,22 +36,27 @@ module.exports = Backbone.Router.extend({
 	login:function() {
 	  this.changePage(Application.loginView);
 	},
-	involved:function(){
+	involved:function() {
   	this.changePage(Application.involvedView);
   	//Application.involvedView.enableScroll();
   },
 	settings:function() {
 	  this.changePage(Application.settingsView);
 	},
-	profile:function(){
-		this.changePage(Application.profileView);
-	  Application.profileView.enableScroll();
+	profile:function() {
+    if (window.localStorage.getItem('user_logged_in') == 'false') {
+      this.changePage(Application.profileAnonymousView);
+    }
+    else {
+  		this.changePage(Application.profileView);
+  	  Application.profileView.enableScroll();
+    }
 	},
-	campaign:function(){
+	campaign:function() {
   	this.changePage(Application.campaignView);
   	//Application.campaignView.enableScroll();
   },
-	session:function(){
+	session:function() {
 		this.changePage(Application.sessionView);
 		//Application.sessionView.authFb("#about");
 	},

@@ -738,6 +738,23 @@ select {
 #profile_page .campaign_details_right {
   right: 15px;
 }
+/* PROFILE ANONYMOUS ******************************/
+#profile_anonymous_page .scroll_wrapper {
+  background: #efefef;
+}
+#profile_anonymous_page .profile-anon-section {
+  border: solid #fff;
+  margin: 20px 10px;
+  padding: 10px;
+}
+#profile_anonymous_page .profile-anon-section .description {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#profile_anonymous_page .profile-anon-section .button {
+  font-size: 20px;
+}
 /* FAQ ******************************/
 #faq_page .scroll_wrapper {
   background: #efefef;

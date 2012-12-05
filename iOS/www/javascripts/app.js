@@ -92,6 +92,7 @@ window.require.define({"application": function(exports, require, module) {
   		var InvolvedView = require('views/involved_view');
   		var SettingsView = require('views/settings_view');
   		var ProfileView = require("views/profile_view");
+  		var ProfileAnonymousView = require("views/profile_anonymous_view");
   		var CampaignView = require("views/campaign_view");
   		var SessionView = require("views/session_view");
   		var Router = require('lib/router');  
@@ -101,6 +102,7 @@ window.require.define({"application": function(exports, require, module) {
       this.involvedView = new InvolvedView();
       this.settingsView = new SettingsView();
       this.profileView = new ProfileView();
+      this.profileAnonymousView = new ProfileAnonymousView();
       this.campaignView = new CampaignView();
       this.sessionView = new SessionView();
       this.router = new Router();
@@ -224,22 +226,27 @@ window.require.define({"lib/router": function(exports, require, module) {
   	login:function() {
   	  this.changePage(Application.loginView);
   	},
-  	involved:function(){
+  	involved:function() {
     	this.changePage(Application.involvedView);
     	//Application.involvedView.enableScroll();
     },
   	settings:function() {
   	  this.changePage(Application.settingsView);
   	},
-  	profile:function(){
-  		this.changePage(Application.profileView);
-  	  Application.profileView.enableScroll();
+  	profile:function() {
+      if (window.localStorage.getItem('user_logged_in') == 'false') {
+        this.changePage(Application.profileAnonymousView);
+      }
+      else {
+    		this.changePage(Application.profileView);
+    	  Application.profileView.enableScroll();
+      }
   	},
-  	campaign:function(){
+  	campaign:function() {
     	this.changePage(Application.campaignView);
     	//Application.campaignView.enableScroll();
     },
-  	session:function(){
+  	session:function() {
   		this.changePage(Application.sessionView);
   		//Application.sessionView.authFb("#about");
   	},
@@ -289,7 +296,8 @@ window.require.define({"models/campaigns": function(exports, require, module) {
   module.exports = Backbone.Collection.extend({
   	
   	model: Campaign,
-  	url: 'http://apps.dosomething.org/m_app_api/?q=campaigns',
+  	//url: 'http://apps.dosomething.org/m_app_api/?q=campaigns',
+    url: 'http://localhost/DS-Apps/m_app_api/?q=campaigns',
   	handle: function(){
 
   		return { "campaigns": this.toJSON() };
@@ -507,6 +515,39 @@ window.require.define({"views/login_view": function(exports, require, module) {
   module.exports = View.extend({
     id: 'login-view',
     template: template  
+  });
+  
+}});
+
+window.require.define({"views/profile_anonymous_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/profile_anonymous');
+
+  module.exports = View.extend({
+    id: 'profile-anonymous-view',
+    template: template,
+    events: {
+      
+    },
+     
+    initialize: function() {  
+    
+    },
+
+    render: function() {  
+      this.$el.html(this.template(this.getRenderData()));
+      this.afterRender();
+      return this;
+    },
+
+    enableScroll:function(){
+      var scroll = new iScroll('wrapper2');
+    },
+
+    afterRender: function() {
+    
+    }
+
   });
   
 }});
@@ -1093,6 +1134,15 @@ window.require.define({"views/templates/profile": function(exports, require, mod
 
 
     return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n		</div>\n	</div>\n</div>";});
+}});
+
+window.require.define({"views/templates/profile_anonymous": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var foundHelper, self=this;
+
+
+    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div class=\"button yellow_button\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div class=\"button yellow_button\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
 }});
 
 window.require.define({"views/templates/settings": function(exports, require, module) {
