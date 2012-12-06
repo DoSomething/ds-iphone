@@ -2,7 +2,7 @@
 Application = {
 
 	initialize: function() {
-		
+
 		if ( window.localStorage.getItem("launchCount") == null){
 			window.localStorage.setItem("launchCount","1");
 		}
@@ -12,6 +12,7 @@ Application = {
 		}
 
 		var LoginView = require('views/login_view');
+		var LoginRegisterView = require('views/login_register_view');
 		var InvolvedView = require('views/involved_view');
 		var SettingsView = require('views/settings_view');
 		var ProfileView = require("views/profile_view");
@@ -22,6 +23,7 @@ Application = {
 
 
     this.loginView = new LoginView();
+    this.loginRegisterView = new LoginRegisterView();
     this.involvedView = new InvolvedView();
     this.settingsView = new SettingsView();
     this.profileView = new ProfileView();

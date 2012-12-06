@@ -7,7 +7,8 @@ module.exports = Backbone.Router.extend({
 		'involved':'involved',
 		'profile':'profile',
 		'campaign':'campaign',
-		'session':'session'
+		'session':'session',
+    'login_register':'login_register'
 	},
 	initialize:function () {
     // Handle back button throughout the application
@@ -31,11 +32,14 @@ module.exports = Backbone.Router.extend({
  	},
   home:function () {
 
-
 	},
 	login:function() {
 	  this.changePage(Application.loginView);
 	},
+  login_register:function() {
+    this.changePage(Application.loginRegisterView);
+    Application.loginRegisterView.enableScroll();
+  },
 	involved:function() {
   	this.changePage(Application.involvedView);
   	//Application.involvedView.enableScroll();

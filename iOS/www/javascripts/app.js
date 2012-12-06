@@ -79,7 +79,7 @@ window.require.define({"application": function(exports, require, module) {
   Application = {
 
   	initialize: function() {
-  		
+
   		if ( window.localStorage.getItem("launchCount") == null){
   			window.localStorage.setItem("launchCount","1");
   		}
@@ -89,6 +89,7 @@ window.require.define({"application": function(exports, require, module) {
   		}
 
   		var LoginView = require('views/login_view');
+  		var LoginRegisterView = require('views/login_register_view');
   		var InvolvedView = require('views/involved_view');
   		var SettingsView = require('views/settings_view');
   		var ProfileView = require("views/profile_view");
@@ -99,6 +100,7 @@ window.require.define({"application": function(exports, require, module) {
 
 
       this.loginView = new LoginView();
+      this.loginRegisterView = new LoginRegisterView();
       this.involvedView = new InvolvedView();
       this.settingsView = new SettingsView();
       this.profileView = new ProfileView();
@@ -197,7 +199,8 @@ window.require.define({"lib/router": function(exports, require, module) {
   		'involved':'involved',
   		'profile':'profile',
   		'campaign':'campaign',
-  		'session':'session'
+  		'session':'session',
+      'login_register':'login_register'
   	},
   	initialize:function () {
       // Handle back button throughout the application
@@ -221,11 +224,14 @@ window.require.define({"lib/router": function(exports, require, module) {
    	},
     home:function () {
 
-
   	},
   	login:function() {
   	  this.changePage(Application.loginView);
   	},
+    login_register:function() {
+      this.changePage(Application.loginRegisterView);
+      Application.loginRegisterView.enableScroll();
+    },
   	involved:function() {
     	this.changePage(Application.involvedView);
     	//Application.involvedView.enableScroll();
@@ -508,23 +514,12 @@ window.require.define({"views/involved_view": function(exports, require, module)
   
 }});
 
-window.require.define({"views/login_view": function(exports, require, module) {
+window.require.define({"views/login_register_view": function(exports, require, module) {
   var View = require('./view');
-  var template = require('./templates/login');
+  var template = require('./templates/loginRegister');
 
   module.exports = View.extend({
-    id: 'login-view',
-    template: template  
-  });
-  
-}});
-
-window.require.define({"views/profile_anonymous_view": function(exports, require, module) {
-  var View = require('./view');
-  var template = require('./templates/profile_anonymous');
-
-  module.exports = View.extend({
-    id: 'profile-anonymous-view',
+    id: 'login-register-view',
     template: template,
     events: {
       
@@ -546,6 +541,62 @@ window.require.define({"views/profile_anonymous_view": function(exports, require
 
     afterRender: function() {
     
+    },
+
+  });
+  
+}});
+
+window.require.define({"views/login_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/login');
+
+  module.exports = View.extend({
+    id: 'login-view',
+    template: template  
+  });
+  
+}});
+
+window.require.define({"views/profile_anonymous_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/profile_anonymous');
+
+  module.exports = View.extend({
+    id: 'profile-anonymous-view',
+    template: template,
+    events: {
+      "tap #btnProfileLoginRegister":"goLoginRegister",
+      "tap #btnProfileGetInvolved":"goInvolved"
+    },
+     
+    initialize: function() {  
+    
+    },
+
+    render: function() {  
+      this.$el.html(this.template(this.getRenderData()));
+      this.afterRender();
+      return this;
+    },
+
+    enableScroll:function(){
+      var scroll = new iScroll('wrapper2');
+    },
+
+    afterRender: function() {
+    
+    },
+
+    goInvolved: function(e) {
+      $('.tab_wrapper').removeClass('tab_wrapper_active');
+      $('#getInvolved_tab').addClass('tab_wrapper_active');
+      Application.router.navigate("#involved", {trigger: true});
+    },
+
+    goLoginRegister: function(e) {
+      $('.tab_wrapper').removeClass('tab_wrapper_active');
+      Application.router.navigate("#login_register" , {trigger: true});
     }
 
   });
@@ -1142,7 +1193,7 @@ window.require.define({"views/templates/profile_anonymous": function(exports, re
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div class=\"button yellow_button\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div class=\"button yellow_button\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
+    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div id=\"btnProfileLoginRegister\" class=\"button yellow_button\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div id=\"btnProfileGetInvolved\" class=\"button yellow_button\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
 }});
 
 window.require.define({"views/templates/settings": function(exports, require, module) {

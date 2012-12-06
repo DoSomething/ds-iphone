@@ -5,7 +5,8 @@ module.exports = View.extend({
   id: 'profile-anonymous-view',
   template: template,
   events: {
-    
+    "tap #btnProfileLoginRegister":"goLoginRegister",
+    "tap #btnProfileGetInvolved":"goInvolved"
   },
    
   initialize: function() {  
@@ -24,6 +25,17 @@ module.exports = View.extend({
 
   afterRender: function() {
   
+  },
+
+  goInvolved: function(e) {
+    $('.tab_wrapper').removeClass('tab_wrapper_active');
+    $('#getInvolved_tab').addClass('tab_wrapper_active');
+    Application.router.navigate("#involved", {trigger: true});
+  },
+
+  goLoginRegister: function(e) {
+    $('.tab_wrapper').removeClass('tab_wrapper_active');
+    Application.router.navigate("#login_register" , {trigger: true});
   }
 
 });
