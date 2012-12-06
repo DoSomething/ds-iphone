@@ -8,7 +8,8 @@ module.exports = Backbone.Router.extend({
 		'profile':'profile',
 		'campaign':'campaign',
 		'session':'session',
-    'login_register':'login_register'
+    'login':'login',
+    'login_register':'login_register',
 	},
 	initialize:function () {
     // Handle back button throughout the application
