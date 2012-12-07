@@ -303,8 +303,7 @@ window.require.define({"models/campaigns": function(exports, require, module) {
   module.exports = Backbone.Collection.extend({
   	
   	model: Campaign,
-  	//url: 'http://apps.dosomething.org/m_app_api/?q=campaigns',
-    url: 'http://localhost/DS-Apps/m_app_api/?q=campaigns',
+  	url: 'http://apps.dosomething.org/m_app_api/?q=campaigns',
   	handle: function(){
 
   		return { "campaigns": this.toJSON() };
@@ -523,11 +522,11 @@ window.require.define({"views/login_register_view": function(exports, require, m
     id: 'login-register-view',
     template: template,
     events: {
-      
+      'submit #registerForm': 'loginRegisterSubmit',
     },
      
     initialize: function() {  
-    
+
     },
 
     render: function() {  
@@ -544,6 +543,10 @@ window.require.define({"views/login_register_view": function(exports, require, m
     
     },
 
+    loginRegisterSubmit: function(e) {
+      
+    }
+
   });
   
 }});
@@ -555,11 +558,18 @@ window.require.define({"views/login_view": function(exports, require, module) {
   module.exports = View.extend({
     id: 'login-view',
     template: template,
+    events: {
+      "tap #register_button" : "goRegister",
+    },
 
     render: function() {
       this.$el.html(this.template(this.getRenderData()));
       return this;
     },
+
+    goRegister: function(e) {
+      Application.router.navigate('#login_register', {trigger: true});
+    }
 
   });
   
@@ -1164,7 +1174,7 @@ window.require.define({"views/templates/login": function(exports, require, modul
     var foundHelper, self=this;
 
 
-    return "<div id=\"login_page\" class=\"content_wrapper\">\n	<div class=\"bglogo\"></div>\n	<form>\n		<input type=\"email\" name=\"email\" placeholder=\"Email / Username\" />\n		<input type=\"text\" name=\"password\" placeholder=\"Password\" />\n		<input type=\"submit\" name=\"loginDS\" class=\"button yellow_button active_yellow\" value=\"Log In\" />\n		<div id=\"register_button\" class=\"button yellow_button active_yellow\">Become a member</div>\n		<div id=\"facebook_login\" class=\"button facebook_button\"></div>\n	</form>\n</div>";});
+    return "<div id=\"login_page\" class=\"content_wrapper\">\n	<div class=\"bglogo\"></div>\n	<form>\n		<input type=\"email\" name=\"email\" placeholder=\"Email / Username\" />\n		<input type=\"text\" name=\"password\" placeholder=\"Password\" />\n		<input type=\"submit\" name=\"loginDS\" class=\"button yellow_button active_yellow\" value=\"Log In\" />\n		<div id=\"register_button\" class=\"button yellow_button active_yellow\">\n      Become a member\n    </div>\n		<div id=\"facebook_login\" class=\"button facebook_button\"></div>\n	</form>\n</div>";});
 }});
 
 window.require.define({"views/templates/loginRegister": function(exports, require, module) {
@@ -1173,7 +1183,7 @@ window.require.define({"views/templates/loginRegister": function(exports, requir
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div class=\"logo\">\n		<img src=\"images/login_logo.png\" />\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper palette\">\n	<div class=\"little_info\">Before you get started we need a little info</div>\n	<form>\n		<div class=\"label\">First Name</div>\n		<input type=\"text\" name=\"first_name\" />\n		<div class=\"label\">Last Name</div>\n		<input type=\"text\" name=\"last_name\" />\n		<div class=\"label\">Email or Cell #</div>\n		<input type=\"text\" name=\"email\" />\n		<input type=\"submit\" name=\"loginDS\" class=\"login_button\" value=\"Let's Do This\" />\n	</form>\n</div>";});
+    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Register\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Before you get started we need a little info\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n				<div class=\"label\">Birthday</div>\n				<input type=\"date\" name=\"birthday\" />\n				<div class=\"label\">Confirm your password</div>\n				<input type=\"password\" name=\"password\" class=\"password\" /> \n\n				<input type=\"submit\" name=\"loginDS\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/loginSplash": function(exports, require, module) {
@@ -1200,7 +1210,7 @@ window.require.define({"views/templates/profile_anonymous": function(exports, re
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div id=\"btnProfileLogin\" class=\"button yellow_button\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div id=\"btnProfileGetInvolved\" class=\"button yellow_button\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
+    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div id=\"btnProfileLogin\" class=\"button yellow_button active_yellow\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div id=\"btnProfileGetInvolved\" class=\"button yellow_button active_yellow\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
 }});
 
 window.require.define({"views/templates/settings": function(exports, require, module) {

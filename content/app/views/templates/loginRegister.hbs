@@ -1,19 +1,28 @@
 <div id="header">
 	<div class="back_button"></div>
-	<div class="logo">
-		<img src="images/login_logo.png" />
+	<div id="header_title" class="title">
+		Register
 	</div>
 </div>
 
-<div id="register_page" class="content_wrapper palette">
-	<div class="little_info">Before you get started we need a little info</div>
-	<form>
-		<div class="label">First Name</div>
-		<input type="text" name="first_name" />
-		<div class="label">Last Name</div>
-		<input type="text" name="last_name" />
-		<div class="label">Email or Cell #</div>
-		<input type="text" name="email" />
-		<input type="submit" name="loginDS" class="login_button" value="Let's Do This" />
-	</form>
+<div id="register_page" class="content_wrapper">
+	<div id="wrapper2" class="scroll_wrapper">
+		<div id="scroller">
+			<div class="little_info">
+				Before you get started we need a little info
+			</div>
+			<form id="registerForm">
+				<div class="label">Email</div>
+				<input type="email" name="email" />
+				<div class="label">Cell #</div>
+				<input type="tel" name="cell" />
+				<div class="label">Birthday</div>
+				<input type="date" name="birthday" />
+				<div class="label">Confirm your password</div>
+				<input type="password" name="password" class="password" /> 
+
+				<input type="submit" name="loginDS" class="button login_button yellow_button active_button" value="Let's Do This" />
+			</form>
+		</div>
+	</div>
 </div>

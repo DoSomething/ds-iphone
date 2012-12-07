@@ -5,11 +5,11 @@ module.exports = View.extend({
   id: 'login-register-view',
   template: template,
   events: {
-    
+    'submit #registerForm': 'loginRegisterSubmit',
   },
    
   initialize: function() {  
-  
+
   },
 
   render: function() {  
@@ -25,5 +25,9 @@ module.exports = View.extend({
   afterRender: function() {
   
   },
+
+  loginRegisterSubmit: function(e) {
+    
+  }
 
 });

@@ -542,7 +542,8 @@ input[type="submit"] {
 #register_page input[type="email"],
 #register_page input[type="number"],
 #register_page input[type="tel"],
-#register_page input[type="date"] {
+#register_page input[type="date"],
+#register_page input[type="password"] {
   margin: 0;
   width: 94%;
   padding: 4px 0 4px 10px;
@@ -557,7 +558,12 @@ input[type="submit"] {
   width: 128px;
   height: 30px;
   line-height: 33px;
-  font-size: 16px;
+  font-size: 18px;
+}
+#register_page .little_info {
+  font-size: 18px;
+  margin: 10px auto;
+  width: 92%;
 }
 #register_page input[type="submit"] {
   width: 130px;
