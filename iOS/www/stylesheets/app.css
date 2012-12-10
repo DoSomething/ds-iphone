@@ -498,7 +498,7 @@ input[type="submit"] {
   background: #1e1d1c;
   border-top: 10px solid #18408b;
 }
-#login_page input[type="text"],
+#login_page input[type="password"],
 #login_page input[type="email"] {
   margin-left: 13px;
   margin-top: 5px;
@@ -574,7 +574,8 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="tel"],
-input[type="date"] {
+input[type="date"],
+input[type="password"] {
   font-size: 16px;
 }
 input[type="submit"] {

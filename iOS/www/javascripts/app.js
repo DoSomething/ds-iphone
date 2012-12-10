@@ -623,12 +623,45 @@ window.require.define({"views/login_view": function(exports, require, module) {
     id: 'login-view',
     template: template,
     events: {
-      "tap #register_button" : "goRegister",
+      "submit form": "login",
+      "tap #register_button": "goRegister",
     },
 
     render: function() {
       this.$el.html(this.template(this.getRenderData()));
       return this;
+    },
+
+    login: function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      var email = $('input[name=email]').val();
+      var password = $('input[name=password]').val();
+
+      var data = {
+        "email": email,
+        "password": password,
+      };
+
+      $.ajax({
+        url: 'http://www.dosomething.org/rest/user/login.json',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+
+        error: function(textStatus, errorThrown) {
+          alert(JSON.stringify(textStatus));
+        },
+
+        success: function(data) {
+          window.localStorage.setItem("user_logged_in","true");
+          Application.router.navigate("#profile", {trigger: true});
+
+          alert('Login successful.');
+        },
+      });
     },
 
     goRegister: function(e) {
@@ -1256,7 +1289,7 @@ window.require.define({"views/templates/login": function(exports, require, modul
     var foundHelper, self=this;
 
 
-    return "<div id=\"login_page\" class=\"content_wrapper\">\n	<div class=\"bglogo\"></div>\n	<form>\n		<input type=\"email\" name=\"email\" placeholder=\"Email / Username\" />\n		<input type=\"text\" name=\"password\" placeholder=\"Password\" />\n		<input type=\"submit\" name=\"loginDS\" class=\"button yellow_button active_yellow\" value=\"Log In\" />\n		<div id=\"register_button\" class=\"button yellow_button active_yellow\">\n      Become a member\n    </div>\n		<div id=\"facebook_login\" class=\"button facebook_button\"></div>\n	</form>\n</div>";});
+    return "<div id=\"login_page\" class=\"content_wrapper\">\n	<div class=\"bglogo\"></div>\n	<form>\n		<input type=\"email\" name=\"email\" placeholder=\"Email / Username\" />\n		<input type=\"password\" name=\"password\" placeholder=\"Password\" />\n		<input id=\"login_button\" type=\"submit\" name=\"ds_login\" class=\"button yellow_button active_yellow\" value=\"Log In\" />\n		<div id=\"register_button\" class=\"button yellow_button active_yellow\">\n      Become a member\n    </div>\n		<div id=\"facebook_login\" class=\"button facebook_button\"></div>\n	</form>\n</div>";});
 }});
 
 window.require.define({"views/templates/loginRegister": function(exports, require, module) {
@@ -1265,7 +1298,7 @@ window.require.define({"views/templates/loginRegister": function(exports, requir
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Register\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Before you get started we need a little info\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n				<div class=\"label\">First Name</div>\n				<input type=\"text\" name=\"first_name\" />\n				<div class=\"label\">Last Name</div>\n				<input type=\"text\" name=\"last_name\" />\n				<div class=\"label\">Birthday</div>\n				<input type=\"date\" name=\"birthday\" />\n				<div class=\"label\">Confirm your password</div>\n				<input type=\"password\" name=\"password\" class=\"password\" /> \n\n				<input type=\"submit\" name=\"loginDS\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
+    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Register\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Before you get started we need a little info\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n				<div class=\"label\">First Name</div>\n				<input type=\"text\" name=\"first_name\" />\n				<div class=\"label\">Last Name</div>\n				<input type=\"text\" name=\"last_name\" />\n				<div class=\"label\">Birthday</div>\n				<input type=\"date\" name=\"birthday\" />\n				<div class=\"label\">Confirm your password</div>\n				<input type=\"password\" name=\"password\" class=\"password\" /> \n\n				<input type=\"submit\" name=\"ds_register\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/loginSplash": function(exports, require, module) {
