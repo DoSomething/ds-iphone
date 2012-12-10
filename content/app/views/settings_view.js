@@ -27,7 +27,7 @@ module.exports = View.extend({
 
   logout: function(e) {
     $.ajax({
-      url: 'http://www.dosomething.org/rest/user/logout.json',
+      url: Application.baseURL + 'rest/user/logout.json',
       type: 'POST',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',

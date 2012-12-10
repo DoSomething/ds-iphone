@@ -98,7 +98,7 @@ window.require.define({"application": function(exports, require, module) {
   		var SessionView = require("views/session_view");
   		var Router = require('lib/router');  
 
-
+      this.baseURL = 'https://www.dosomething.org/';
       this.loginView = new LoginView();
       this.loginRegisterView = new LoginRegisterView();
       this.involvedView = new InvolvedView();
@@ -592,7 +592,7 @@ window.require.define({"views/login_register_view": function(exports, require, m
       };
 
       $.ajax({
-        url: 'http://www.dosomething.org/rest/user/register.json',
+        url: Application.baseURL + 'rest/user/register.json',
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8',
@@ -645,7 +645,7 @@ window.require.define({"views/login_view": function(exports, require, module) {
       };
 
       $.ajax({
-        url: 'http://www.dosomething.org/rest/user/login.json',
+        url: Application.baseURL + 'rest/user/login.json',
         type: 'POST',
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8',
@@ -929,7 +929,7 @@ window.require.define({"views/settings_view": function(exports, require, module)
 
     logout: function(e) {
       $.ajax({
-        url: 'http://www.dosomething.org/rest/user/logout.json',
+        url: Application.baseURL + 'rest/user/logout.json',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',

@@ -21,7 +21,7 @@ Application = {
 		var SessionView = require("views/session_view");
 		var Router = require('lib/router');  
 
-
+    this.baseURL = 'https://www.dosomething.org/';
     this.loginView = new LoginView();
     this.loginRegisterView = new LoginRegisterView();
     this.involvedView = new InvolvedView();

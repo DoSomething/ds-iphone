@@ -75,7 +75,7 @@ module.exports = View.extend({
     };
 
     $.ajax({
-      url: 'http://www.dosomething.org/rest/user/register.json',
+      url: Application.baseURL + 'rest/user/register.json',
       type: 'POST',
       data: JSON.stringify(data),
       contentType: 'application/json; charset=utf-8',
