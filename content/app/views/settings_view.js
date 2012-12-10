@@ -5,9 +5,8 @@ module.exports = View.extend({
   id: 'settings-view',
   template: template,
   events: {
-	
-	
-	},
+    'tap .logout': 'logout',
+  },
    
   initialize: function() {  
 
@@ -23,8 +22,27 @@ module.exports = View.extend({
   },
 
   afterRender: function() {
-	
-	
-	}
+
+	},
+
+  logout: function(e) {
+    $.ajax({
+      url: 'http://www.dosomething.org/rest/user/logout.json',
+      type: 'POST',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+
+      error: function(textStatus, errorThrown) {
+        // TODO handle scenario where user is not logged in
+        alert(JSON.stringify(textStatus));
+      },
+
+      success: function(data) {
+        window.localStorage.setItem("user_logged_in","false");
+
+        alert('Logged out');
+      },
+    });
+  }
 
 });

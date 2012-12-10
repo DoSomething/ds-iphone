@@ -544,7 +544,71 @@ window.require.define({"views/login_register_view": function(exports, require, m
     },
 
     loginRegisterSubmit: function(e) {
-      
+      e.preventDefault();
+
+      var email = $('input[name=email]').val();
+      var cell = $('input[name=cell]').val();
+      var f_name = $('input[name=first_name]').val();
+      var l_name = $('input[name=last_name]').val();
+      var bday = $('input[name=birthday]').val();
+      var password = $('input[name=password]').val();
+
+      var data = {
+        "name": email,
+        "pass": password,
+        "mail": email,
+        "profile_main": {
+          "field_user_birthday": {
+            "und": [
+              {
+                "value": {
+                  "date": bday,
+                },
+              },
+            ],
+          },
+          "field_user_first_name": {
+            "und": [
+              {
+                "value": f_name,
+              },
+            ],
+          },
+          "field_user_last_name": {
+            "und": [
+              {
+                "value": l_name,
+              },
+            ],
+          },
+          "field_user_mobile": {
+            "und": [
+              {
+                "value": cell,
+              },
+            ],
+          },
+        },
+      };
+
+      $.ajax({
+        url: 'http://www.dosomething.org/rest/user/register.json',
+        type: 'POST',
+        data: JSON.stringify(data),
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+
+        error: function(textStatus, errorThrown) {
+          alert(JSON.stringify(textStatus));
+        },
+
+        success: function(data) {
+          window.localStorage.setItem("user_logged_in","true");
+          Application.router.navigate("#profile", {trigger: true});
+
+          alert('Registration successful.');
+        }
+      });
     }
 
   });
@@ -810,9 +874,8 @@ window.require.define({"views/settings_view": function(exports, require, module)
     id: 'settings-view',
     template: template,
     events: {
-  	
-  	
-  	},
+      'tap .logout': 'logout',
+    },
      
     initialize: function() {  
 
@@ -828,9 +891,28 @@ window.require.define({"views/settings_view": function(exports, require, module)
     },
 
     afterRender: function() {
-  	
-  	
-  	}
+
+  	},
+
+    logout: function(e) {
+      $.ajax({
+        url: 'http://www.dosomething.org/rest/user/logout.json',
+        type: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+
+        error: function(textStatus, errorThrown) {
+          // TODO handle scenario where user is not logged in
+          alert(JSON.stringify(textStatus));
+        },
+
+        success: function(data) {
+          window.localStorage.setItem("user_logged_in","false");
+
+          alert('Logged out');
+        },
+      });
+    }
 
   });
   
@@ -1183,7 +1265,7 @@ window.require.define({"views/templates/loginRegister": function(exports, requir
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Register\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Before you get started we need a little info\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n				<div class=\"label\">Birthday</div>\n				<input type=\"date\" name=\"birthday\" />\n				<div class=\"label\">Confirm your password</div>\n				<input type=\"password\" name=\"password\" class=\"password\" /> \n\n				<input type=\"submit\" name=\"loginDS\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
+    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Register\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Before you get started we need a little info\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n				<div class=\"label\">First Name</div>\n				<input type=\"text\" name=\"first_name\" />\n				<div class=\"label\">Last Name</div>\n				<input type=\"text\" name=\"last_name\" />\n				<div class=\"label\">Birthday</div>\n				<input type=\"date\" name=\"birthday\" />\n				<div class=\"label\">Confirm your password</div>\n				<input type=\"password\" name=\"password\" class=\"password\" /> \n\n				<input type=\"submit\" name=\"loginDS\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/loginSplash": function(exports, require, module) {
@@ -1219,7 +1301,7 @@ window.require.define({"views/templates/settings": function(exports, require, mo
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Settings</div>\n</div>\n\n<div id=\"settings_page\" class=\"content_wrapper\">\n	<div class=\"button gray_button active_gray\">Your Causes</div>\n	<div class=\"button gray_button active_gray\">Terms of Use</div>\n	<div class=\"button gray_button active_gray\">Privacy Policy</div>\n	<div class=\"button gray_button active_gray\">Log Out</div>\n</div>";});
+    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Settings</div>\n</div>\n\n<div id=\"settings_page\" class=\"content_wrapper\">\n	<div class=\"button gray_button active_gray\">Your Causes</div>\n	<div class=\"button gray_button active_gray\">Terms of Use</div>\n	<div class=\"button gray_button active_gray\">Privacy Policy</div>\n	<div class=\"button gray_button active_gray logout\">Log Out</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/spinner": function(exports, require, module) {
