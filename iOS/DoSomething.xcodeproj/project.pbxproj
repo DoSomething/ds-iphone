@@ -38,6 +38,11 @@
 		30E1352710E2C1420031B30D /* Cordova.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30E1352610E2C1420031B30D /* Cordova.plist */; };
 		30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30E5649113A7FCAF007403D8 /* CoreMedia.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
+		EB2B71BE1677A14700E434AA /* FacebookConnect.m in Sources */ = {isa = PBXBuildFile; fileRef = EB2B71BC1677A14700E434AA /* FacebookConnect.m */; };
+		EB2B71BF1677A14700E434AA /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B71BD1677A14700E434AA /* FacebookSDK.framework */; };
+		EB2B71C11677A31E00E434AA /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B71C01677A31E00E434AA /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EB2B71C31677A33700E434AA /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B71C21677A33700E434AA /* Accounts.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		EB2B71C51677A33E00E434AA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B71C41677A33E00E434AA /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +99,12 @@
 		32CA4F630368D1EE00C91783 /* DoSomething-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DoSomething-Prefix.pch"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* DoSomething-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "DoSomething-Info.plist"; path = "../DoSomething-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
+		EB2B71BB1677A14700E434AA /* FacebookConnect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookConnect.h; sourceTree = "<group>"; };
+		EB2B71BC1677A14700E434AA /* FacebookConnect.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookConnect.m; sourceTree = "<group>"; };
+		EB2B71BD1677A14700E434AA /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
+		EB2B71C01677A31E00E434AA /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		EB2B71C21677A33700E434AA /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		EB2B71C41677A33E00E434AA /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +127,10 @@
 				301BF5C5109A6A2B0062928A /* SystemConfiguration.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
 				30E5649213A7FCAF007403D8 /* CoreMedia.framework in Frameworks */,
+				EB2B71BF1677A14700E434AA /* FacebookSDK.framework in Frameworks */,
+				EB2B71C51677A33E00E434AA /* AdSupport.framework in Frameworks */,
+				EB2B71C31677A33700E434AA /* Accounts.framework in Frameworks */,
+				EB2B71C11677A31E00E434AA /* Social.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +219,9 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB2B71C41677A33E00E434AA /* AdSupport.framework */,
+				EB2B71C21677A33700E434AA /* Accounts.framework */,
+				EB2B71C01677A31E00E434AA /* Social.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
@@ -233,6 +251,7 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				EB2B71BA1677A14700E434AA /* FacebookConnect */,
 			);
 			name = Plugins;
 			path = DoSomething/Plugins;
@@ -271,6 +290,16 @@
 				30A0434614DC770100060A13 /* Localizable.strings */,
 			);
 			path = se.lproj;
+			sourceTree = "<group>";
+		};
+		EB2B71BA1677A14700E434AA /* FacebookConnect */ = {
+			isa = PBXGroup;
+			children = (
+				EB2B71BB1677A14700E434AA /* FacebookConnect.h */,
+				EB2B71BC1677A14700E434AA /* FacebookConnect.m */,
+				EB2B71BD1677A14700E434AA /* FacebookSDK.framework */,
+			);
+			path = FacebookConnect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,6 +419,7 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
+				EB2B71BE1677A14700E434AA /* FacebookConnect.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,6 +476,10 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DoSomething/Plugins/FacebookConnect\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -454,6 +488,20 @@
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DoSomething/DoSomething-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					CoreFoundation,
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak-lSystem",
+					"-all_load",
+					"-Obj-C",
+					"-lsqlite3.0",
+				);
 				PRODUCT_NAME = DoSomething;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -466,12 +514,30 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_OBJCPP_ARC_ABI = YES;
 				COPY_PHASE_STRIP = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/DoSomething/Plugins/FacebookConnect\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoSomething/DoSomething-Prefix.pch";
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "DoSomething/DoSomething-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = (
+					"-weak_framework",
+					CoreFoundation,
+					"-weak_framework",
+					UIKit,
+					"-weak_framework",
+					AVFoundation,
+					"-weak_framework",
+					CoreMedia,
+					"-weak-lSystem",
+					"-all_load",
+					"-Obj-C",
+					"-lsqlite3.0",
+				);
 				PRODUCT_NAME = DoSomething;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

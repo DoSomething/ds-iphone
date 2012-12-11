@@ -68,6 +68,8 @@
 		<string>CDVBattery</string>
 		<key>Globalization</key>
 		<string>CDVGlobalization</string>
+		<key>FacebookConnect</key>
+		<string>FacebookConnect</string>
 	</dict>
 </dict>
 </plist>
