@@ -9,6 +9,8 @@ module.exports = View.extend({
     "tap #register_button": "goRegister",
     "tap #facebook_login": "authFacebook",
   },
+  fbAppId: '525191857506466',
+  fbPermissions: ['email', 'user_about_me'],
 
   render: function() {
     this.$el.html(this.template(this.getRenderData()));
@@ -39,10 +41,7 @@ module.exports = View.extend({
       },
 
       success: function(data) {
-        window.localStorage.setItem("user_logged_in","true");
-        Application.router.navigate("#profile", {trigger: true});
-
-        alert('Login successful.');
+        Application.loginView.finishLogin();
       },
     });
   },
@@ -50,8 +49,8 @@ module.exports = View.extend({
   authFacebook: function(e) {
     window.plugins.facebookConnect.login(
       {
-        permissions: ['email', 'user_about_me', 'publish_stream'],
-        appId: '525191857506466',
+        permissions: this.fbPermissions,
+        appId: this.fbAppId,
       },
 
       function(result) {
@@ -59,14 +58,43 @@ module.exports = View.extend({
           alert("FacebookConnect.login:failedWithError:" + result.message);
         }
         else {
-          Application.LoginView.onAuthFacebookSuccess(result);
+          Application.loginView.onAuthFacebookSuccess(result);
         }
       }
     );
   },
 
   onAuthFacebookSuccess: function(result) {
-    alert("fb auth success - fb_id:"+result.id+" / user_fb_auth:true / fb_auth_token:"+result.accessToken);
+    var data = {
+      "access_token": result.accessToken,
+    };
+
+    // Use the auth token to then create / login to our Drupal backend
+    $.ajax({
+      url: Application.baseURL + 'rest/user/fblogin.json',
+      type: 'POST',
+      data: JSON.stringify(data),
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+
+      error: function(textStatus, errorThrown) {
+        alert(JSON.stringify(textStatus));
+      },
+
+      success: function(data) {
+        Application.loginView.finishLogin();
+      },
+    });
+  },
+
+  // Save logged_in var and navigate to profile screen
+  finishLogin: function() {
+    window.localStorage.setItem("user_logged_in","true");
+
+    Application.router.navigate("#profile", {trigger: true});
+    $('#profile_tab').addClass('tab_wrapper_active');
+
+    alert('Login successful.');
   },
 
   goRegister: function(e) {
