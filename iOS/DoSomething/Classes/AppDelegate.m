@@ -26,6 +26,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Flurry.h"
 #import "MainViewController.h"
 
 #import <Cordova/CDVPlugin.h>
@@ -48,6 +49,11 @@
 }
 
 #pragma UIApplicationDelegate implementation
+
+- (void)applicationDidFinishLaunching:(UIApplication *)application
+{
+    [Flurry startSession:@"FTNTN9VFG7Z9V2QB6S4Q"];
+}
 
 /**
  * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)

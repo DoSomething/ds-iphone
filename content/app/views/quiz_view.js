@@ -102,9 +102,13 @@ module.exports = View.extend({
       }
     }
 
-console.log(window.localStorage.getItem('cause-selection-0'));
-console.log(window.localStorage.getItem('cause-selection-1'));
-console.log(window.localStorage.getItem('cause-selection-2'));
+    if (window.plugins && window.plugins.FlurryPlugin) {
+      window.plugins.FlurryPlugin.logEventWithParameters('causes-selected', {
+        'cause-1': window.localStorage.getItem('cause-selection-0'),
+        'cause-2': window.localStorage.getItem('cause-selection-1'),
+        'cause-3': window.localStorage.getItem('cause-selection-2'),
+      });
+    }
 
     Application.router.navigate('#involved', {trigger: true});
   },

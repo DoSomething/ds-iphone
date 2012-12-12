@@ -104,6 +104,10 @@ module.exports = Backbone.Router.extend({
 	  $(document).delegate(page.el, 'pageshow', function () {
 	  		window.tapReady = true;
 		});
+
+    if (window.plugins && window.plugins.FlurryPlugin) {
+      window.plugins.FlurryPlugin.pageView();
+    }
 	}                                                            
 });
 

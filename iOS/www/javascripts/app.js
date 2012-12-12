@@ -302,6 +302,10 @@ window.require.define({"lib/router": function(exports, require, module) {
   	  $(document).delegate(page.el, 'pageshow', function () {
   	  		window.tapReady = true;
   		});
+
+      if (window.plugins && window.plugins.FlurryPlugin) {
+        window.plugins.FlurryPlugin.pageView();
+      }
   	}                                                            
   });
 
@@ -938,9 +942,13 @@ window.require.define({"views/quiz_view": function(exports, require, module) {
         }
       }
 
-  console.log(window.localStorage.getItem('cause-selection-0'));
-  console.log(window.localStorage.getItem('cause-selection-1'));
-  console.log(window.localStorage.getItem('cause-selection-2'));
+      if (window.plugins && window.plugins.FlurryPlugin) {
+        window.plugins.FlurryPlugin.logEventWithParameters('causes-selected', {
+          'cause-1': window.localStorage.getItem('cause-selection-0'),
+          'cause-2': window.localStorage.getItem('cause-selection-1'),
+          'cause-3': window.localStorage.getItem('cause-selection-2'),
+        });
+      }
 
       Application.router.navigate('#involved', {trigger: true});
     },

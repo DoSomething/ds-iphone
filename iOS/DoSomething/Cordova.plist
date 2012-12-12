@@ -70,6 +70,8 @@
 		<string>CDVGlobalization</string>
 		<key>FacebookConnect</key>
 		<string>FacebookConnect</string>
+		<key>FlurryPlugin</key>
+		<string>FlurryPlugin</string>
 	</dict>
 </dict>
 </plist>
