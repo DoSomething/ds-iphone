@@ -80,22 +80,23 @@ window.require.define({"application": function(exports, require, module) {
 
   	initialize: function() {
 
-  		if ( window.localStorage.getItem("launchCount") == null){
-  			window.localStorage.setItem("launchCount","1");
+  		if ( window.localStorage.getItem('launchCount') == null){
+  			window.localStorage.setItem('launchCount','1');
   		}
   		
-  		if ( window.localStorage.getItem("user_logged_in") == null){
-  			window.localStorage.setItem("user_logged_in","false");
+  		if ( window.localStorage.getItem('user_logged_in') == null){
+  			window.localStorage.setItem('user_logged_in','false');
   		}
 
   		var LoginView = require('views/login_view');
   		var LoginRegisterView = require('views/login_register_view');
   		var InvolvedView = require('views/involved_view');
   		var SettingsView = require('views/settings_view');
-  		var ProfileView = require("views/profile_view");
-  		var ProfileAnonymousView = require("views/profile_anonymous_view");
-  		var CampaignView = require("views/campaign_view");
-  		var SessionView = require("views/session_view");
+  		var ProfileView = require('views/profile_view');
+  		var ProfileAnonymousView = require('views/profile_anonymous_view');
+  		var CampaignView = require('views/campaign_view');
+  		var SessionView = require('views/session_view');
+  		var QuizView = require('views/quiz_view');
   		var Router = require('lib/router');  
 
       this.baseURL = 'https://www.dosomething.org/';
@@ -107,6 +108,7 @@ window.require.define({"application": function(exports, require, module) {
       this.profileAnonymousView = new ProfileAnonymousView();
       this.campaignView = new CampaignView();
       this.sessionView = new SessionView();
+      this.quizView = new QuizView();
       this.router = new Router();
 
       if (typeof Object.freeze === 'function') Object.freeze(this);  
@@ -146,7 +148,11 @@ window.require.define({"application": function(exports, require, module) {
   		$('#profile_tab').bind('tap', profileTab);
   		$('#settings_tab').bind('tap', settingsTab);
 
-  	}
+  	},
+
+  	deactivateTabs: function() {
+  		$('.tab_wrapper').removeClass('tab_wrapper_active');
+  	},
   }
 
   module.exports = Application;
@@ -194,7 +200,7 @@ window.require.define({"lib/router": function(exports, require, module) {
 
   module.exports = Backbone.Router.extend({
   	routes: {
-  		'': 'involved',
+  		'': 'home',
   		'settings':'settings',
   		'involved':'involved',
   		'profile':'profile',
@@ -202,6 +208,7 @@ window.require.define({"lib/router": function(exports, require, module) {
   		'session':'session',
       'login':'login',
       'login_register':'login_register',
+      'quiz':'quiz',
   	},
   	initialize:function () {
       // Handle back button throughout the application
@@ -219,15 +226,26 @@ window.require.define({"lib/router": function(exports, require, module) {
 
   		if ( window.localStorage.getItem("launchCount") == "1"){
   			//this.$el.append("");
-  			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>");    
+  			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>"); 
   		}
 
    	},
     home:function () {
-
+      this.quiz();
+      return;
+      // On initial load of the app, show intro/quiz screens
+      if (window.localStorage.getItem('launchCount') == '1') {
+        this.quiz();
+        window.localStorage.setItem('launchCount', '2');
+      }
+      // Otherwise, go to campaigns screen
+      else {
+        this.involved();
+      }
   	},
   	login:function() {
   	  this.changePage(Application.loginView);
+      Application.loginView.enableScroll();
   	},
     login_register:function() {
       this.changePage(Application.loginRegisterView);
@@ -257,11 +275,20 @@ window.require.define({"lib/router": function(exports, require, module) {
   		this.changePage(Application.sessionView);
   		//Application.sessionView.authFb("#about");
   	},
+    quiz: function() {
+      this.changePage(Application.quizView);
+      Application.deactivateTabs();
+    },
   	changePage:function (page) {
   		window.tapReady = false;
   		$(page.el).attr('data-role', 'page');
   		page.render();
   		$('body').append($(page.el));
+
+      if (page.afterAppend) {
+        page.afterAppend();
+      }
+
   		var transition = $.mobile.defaultPageTransition;
   		var bPage = $.mobile.activePage.back;
   	  // We don't want to slide the first page
@@ -801,6 +828,136 @@ window.require.define({"views/profile_view": function(exports, require, module) 
   	
   	
   	}
+
+  });
+  
+}});
+
+window.require.define({"views/quiz_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/quiz');
+
+  module.exports = View.extend({
+    id: 'quiz-view',
+    template: template,
+    cause_name_mapping: {
+      'cause-animals': 'Animals',
+      'cause-bullying': 'Bullying',
+      'cause-disasters': 'Disasters',
+      'cause-discrimination': 'Discrimination',
+      'cause-education': 'Education',
+      'cause-environment': 'Environment',
+      'cause-health': 'Physical & Mental Health',
+      'cause-human-rights': 'Human Rights',
+      'cause-poverty': 'Homelessness & Poverty',
+      'cause-relationships': 'Sex & Relationships',
+      'cause-troops': 'Our Troops',
+    },
+    events: {
+      'tap .action_button': 'submitQuiz',
+      'tap img': 'selectCause',
+      'pageshow': 'pageShow',
+    },
+
+    pageShow: function(e) {
+      alert('page show');
+    },
+
+    initialize: function() {
+      this.maxSelectedCauses = 3;
+      this.selectedCauses = new Array();
+    },
+
+    render: function() {
+      this.$el.html(this.template(this.getRenderData()));
+      return this;
+    },
+
+    afterAppend: function() {
+      var redrawList = false;
+
+      for (i = 0; i < this.maxSelectedCauses; i++) {
+        var sel = window.localStorage.getItem('cause-selection-' + i);
+        if (sel) {
+          this.selectedCauses[i] = sel;
+          var elem = $('#' + sel);
+          elem.addClass('selected');
+          //$(sel).addClass('selected');
+
+          redrawList = true;
+        }
+      }
+
+      if (redrawList) {
+        this.redrawList();
+      }
+    },
+
+    selectCause: function(e) {
+      var elem = $(e.target);
+      var elemId = elem.attr('id');
+      var len = this.selectedCauses.length;
+      var redrawList = false;
+
+      if (elem.hasClass('selected')) {
+        elem.removeClass('selected');
+
+        var removeId = elemId;
+        for (i = 0; i < len; i++) {
+          if (this.selectedCauses[i] == elemId) {
+            this.selectedCauses[i] = '';
+
+            // Remove selection from array
+            this.selectedCauses.splice(i, 1);
+
+            redrawList = true;
+            break;
+          }
+        }
+      }
+      else {
+        if (len < this.maxSelectedCauses) {
+          this.selectedCauses[len] = elemId;
+          elem.addClass('selected');
+
+          redrawList = true;
+        }
+      }
+
+      if (redrawList) {
+        this.redrawList();
+      }
+    },
+
+    submitQuiz: function() {
+      // TODO: submit results to Flurry
+      
+      for (i = 0; i < this.maxSelectedCauses; i++) {
+        if (this.selectedCauses[i]) {
+          window.localStorage.setItem('cause-selection-' + i, this.selectedCauses[i]);
+        }
+      }
+
+  console.log(window.localStorage.getItem('cause-selection-0'));
+  console.log(window.localStorage.getItem('cause-selection-1'));
+  console.log(window.localStorage.getItem('cause-selection-2'));
+
+      Application.router.navigate('#involved', {trigger: true});
+    },
+
+    redrawList: function() {
+      for (i = 0; i < this.maxSelectedCauses; i++) {
+          var listElem = $('#cause-selection-'+i);
+          var displayIndex = i + 1;
+          var newString = displayIndex + '. ';
+
+          if (this.selectedCauses[i]) {
+            newString += this.cause_name_mapping[this.selectedCauses[i]];
+          }
+
+          listElem.html(newString);
+        }
+    },
 
   });
   
@@ -1377,6 +1534,15 @@ window.require.define({"views/templates/profile_anonymous": function(exports, re
 
 
     return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_anonymous_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Login or Register to participate in our national campaigns and track your progress.\n        </div>\n        <div id=\"btnProfileLogin\" class=\"button yellow_button active_yellow\">\n          GET STARTED NOW\n        </div>\n      </div>\n      <div class=\"profile-anon-section\">\n        <div class=\"description\">\n          Or browse our campaigns to see what you can get involved in!\n        </div>\n        <div id=\"btnProfileGetInvolved\" class=\"button yellow_button active_yellow\">\n          FIND WAYS TO GET INVOLVED\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";});
+}});
+
+window.require.define({"views/templates/quiz": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var foundHelper, self=this;
+
+
+    return "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">\n    Select Your Causes\n  </div>\n</div>\n\n<div id=\"quiz_page\" class=\"content_wrapper\">\n  <div class=\"description\">\n    Help us to know more about you! Select the top 3 causes YOU care about below.\n  </div>\n\n  <!-- Note: This horizontal scroller does not work if the outer page div is a iScroll wrapper -->\n  <div class=\"cause-options-outer\">\n    <div class=\"cause-options-inner\">\n      <img id=\"cause-animals\" src=\"images/cause_animals.png\"/>\n      <img id=\"cause-bullying\" src=\"images/cause_bullying.png\"/>\n      <img id=\"cause-disasters\" src=\"images/cause_disasters.png\"/>\n      <img id=\"cause-discrimination\" src=\"images/cause_discrimination.png\"/>\n      <img id=\"cause-education\" src=\"images/cause_education.png\"/>\n      <img id=\"cause-environment\" src=\"images/cause_environment.png\"/>\n      <img id=\"cause-health\" src=\"images/cause_health.png\"/>\n      <img id=\"cause-human-rights\" src=\"images/cause_human_rights.png\"/>\n      <img id=\"cause-poverty\" src=\"images/cause_poverty.png\"/>\n      <img id=\"cause-relationships\" src=\"images/cause_relationships.png\"/>\n      <img id=\"cause-troops\" src=\"images/cause_troops.png\"/>\n    </div>\n  </div>\n  <div class=\"clear\"></div>\n  <div class=\"cause-selections\">\n    <div id=\"cause-selection-0\" class=\"cause-selection\">\n      1.\n    </div>\n    <div id=\"cause-selection-1\" class=\"cause-selection\">\n      2. \n    </div>\n    <div id=\"cause-selection-2\" class=\"cause-selection\">\n      3.\n    </div>\n  </div>\n  <div class=\"button yellow_button action_button\">\n    CONTINUE\n  </div>\n</div>";});
 }});
 
 window.require.define({"views/templates/settings": function(exports, require, module) {

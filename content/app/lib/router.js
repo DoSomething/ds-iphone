@@ -2,7 +2,7 @@ var application = require('application');
 
 module.exports = Backbone.Router.extend({
 	routes: {
-		'': 'involved',
+		'': 'home',
 		'settings':'settings',
 		'involved':'involved',
 		'profile':'profile',
@@ -10,6 +10,7 @@ module.exports = Backbone.Router.extend({
 		'session':'session',
     'login':'login',
     'login_register':'login_register',
+    'quiz':'quiz',
 	},
 	initialize:function () {
     // Handle back button throughout the application
@@ -27,15 +28,26 @@ module.exports = Backbone.Router.extend({
 
 		if ( window.localStorage.getItem("launchCount") == "1"){
 			//this.$el.append("");
-			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>");    
+			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>"); 
 		}
 
  	},
   home:function () {
-
+    this.quiz();
+    return;
+    // On initial load of the app, show intro/quiz screens
+    if (window.localStorage.getItem('launchCount') == '1') {
+      this.quiz();
+      window.localStorage.setItem('launchCount', '2');
+    }
+    // Otherwise, go to campaigns screen
+    else {
+      this.involved();
+    }
 	},
 	login:function() {
 	  this.changePage(Application.loginView);
+    Application.loginView.enableScroll();
 	},
   login_register:function() {
     this.changePage(Application.loginRegisterView);
@@ -65,11 +77,20 @@ module.exports = Backbone.Router.extend({
 		this.changePage(Application.sessionView);
 		//Application.sessionView.authFb("#about");
 	},
+  quiz: function() {
+    this.changePage(Application.quizView);
+    Application.deactivateTabs();
+  },
 	changePage:function (page) {
 		window.tapReady = false;
 		$(page.el).attr('data-role', 'page');
 		page.render();
 		$('body').append($(page.el));
+
+    if (page.afterAppend) {
+      page.afterAppend();
+    }
+
 		var transition = $.mobile.defaultPageTransition;
 		var bPage = $.mobile.activePage.back;
 	  // We don't want to slide the first page

@@ -3,22 +3,23 @@ Application = {
 
 	initialize: function() {
 
-		if ( window.localStorage.getItem("launchCount") == null){
-			window.localStorage.setItem("launchCount","1");
+		if ( window.localStorage.getItem('launchCount') == null){
+			window.localStorage.setItem('launchCount','1');
 		}
 		
-		if ( window.localStorage.getItem("user_logged_in") == null){
-			window.localStorage.setItem("user_logged_in","false");
+		if ( window.localStorage.getItem('user_logged_in') == null){
+			window.localStorage.setItem('user_logged_in','false');
 		}
 
 		var LoginView = require('views/login_view');
 		var LoginRegisterView = require('views/login_register_view');
 		var InvolvedView = require('views/involved_view');
 		var SettingsView = require('views/settings_view');
-		var ProfileView = require("views/profile_view");
-		var ProfileAnonymousView = require("views/profile_anonymous_view");
-		var CampaignView = require("views/campaign_view");
-		var SessionView = require("views/session_view");
+		var ProfileView = require('views/profile_view');
+		var ProfileAnonymousView = require('views/profile_anonymous_view');
+		var CampaignView = require('views/campaign_view');
+		var SessionView = require('views/session_view');
+		var QuizView = require('views/quiz_view');
 		var Router = require('lib/router');  
 
     this.baseURL = 'https://www.dosomething.org/';
@@ -30,6 +31,7 @@ Application = {
     this.profileAnonymousView = new ProfileAnonymousView();
     this.campaignView = new CampaignView();
     this.sessionView = new SessionView();
+    this.quizView = new QuizView();
     this.router = new Router();
 
     if (typeof Object.freeze === 'function') Object.freeze(this);  
@@ -69,7 +71,11 @@ Application = {
 		$('#profile_tab').bind('tap', profileTab);
 		$('#settings_tab').bind('tap', settingsTab);
 
-	}
+	},
+
+	deactivateTabs: function() {
+		$('.tab_wrapper').removeClass('tab_wrapper_active');
+	},
 }
 
 module.exports = Application;
