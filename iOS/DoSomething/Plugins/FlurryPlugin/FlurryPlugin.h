@@ -12,7 +12,16 @@
 @interface FlurryPlugin : CDVPlugin {
 }
 
-- (void)logPageView:(NSMutableArray*) withDict:(NSMutableDictionary*)options;
-- (void)logEvent:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+- (void)logPageView:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)logEvent:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)logEventTimed:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
 - (void)logEventWithParameters:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)logEventWithParametersTimed:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)endTimedEventWithParameters:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)logError:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)setAge:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)setGender:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)setUserID:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+- (void)setLocation:(NSMutableArray *)arguments withDict:(NSMutableDictionary *)options;
+
 @end
