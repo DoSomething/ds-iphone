@@ -26,7 +26,13 @@
 //
 
 #import <Cordova/CDVViewController.h>
+#import "XtifyCordovaPlugin.h"
 
-@interface MainViewController : CDVViewController
+@interface MainViewController : CDVViewController {
+    XtifyCordovaPlugin *xPlugin;
+    CDVCordovaView *wv;
+}
 
+@property (strong, nonatomic) XtifyCordovaPlugin *xPlugin;
+@property (strong, nonatomic) CDVCordovaView *wv;
 @end

@@ -45,6 +45,21 @@
 		EB2B71C51677A33E00E434AA /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB2B71C41677A33E00E434AA /* AdSupport.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		EB5B757A1678F99D000D0F21 /* FlurryPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5B75791678F99D000D0F21 /* FlurryPlugin.m */; };
 		EB5B757E1678FBBA000D0F21 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B757D1678FBBA000D0F21 /* libFlurry.a */; };
+		EB5B75AC167A641D000D0F21 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75AB167A641D000D0F21 /* MapKit.framework */; };
+		EB5B75AE167A642A000D0F21 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75AD167A642A000D0F21 /* CoreData.framework */; };
+		EB5B75B0167A6441000D0F21 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75AF167A6441000D0F21 /* MessageUI.framework */; };
+		EB5B75B2167A6454000D0F21 /* libxml2.2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75B1167A6454000D0F21 /* libxml2.2.dylib */; };
+		EB5B75B4167A6460000D0F21 /* libz.1.1.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75B3167A6460000D0F21 /* libz.1.1.3.dylib */; };
+		EB5B75B6167A6470000D0F21 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75B5167A6470000D0F21 /* CoreTelephony.framework */; };
+		EB5B75CC167A6765000D0F21 /* XtifyCordovaPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5B75B9167A6765000D0F21 /* XtifyCordovaPlugin.m */; };
+		EB5B75CD167A6765000D0F21 /* XLXtifyOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = EB5B75C1167A6765000D0F21 /* XLXtifyOptions.m */; };
+		EB5B75CE167A6765000D0F21 /* chime.caf in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75C5167A6765000D0F21 /* chime.caf */; };
+		EB5B75CF167A6765000D0F21 /* ding.caf in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75C6167A6765000D0F21 /* ding.caf */; };
+		EB5B75D0167A6765000D0F21 /* expireMsgTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75C7167A6765000D0F21 /* expireMsgTemplate.html */; };
+		EB5B75D1167A6765000D0F21 /* richnotification.mom in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75C8167A6765000D0F21 /* richnotification.mom */; };
+		EB5B75D2167A6765000D0F21 /* richnotificationV1.15.mom in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75C9167A6765000D0F21 /* richnotificationV1.15.mom */; };
+		EB5B75D3167A6765000D0F21 /* silence.caf in Resources */ = {isa = PBXBuildFile; fileRef = EB5B75CA167A6765000D0F21 /* silence.caf */; };
+		EB5B75D4167A6765000D0F21 /* XtifyPush.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB5B75CB167A6765000D0F21 /* XtifyPush.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +126,29 @@
 		EB5B75791678F99D000D0F21 /* FlurryPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlurryPlugin.m; sourceTree = "<group>"; };
 		EB5B757C1678FBBA000D0F21 /* Flurry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Flurry.h; sourceTree = "<group>"; };
 		EB5B757D1678FBBA000D0F21 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
+		EB5B75AB167A641D000D0F21 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		EB5B75AD167A642A000D0F21 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		EB5B75AF167A6441000D0F21 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		EB5B75B1167A6454000D0F21 /* libxml2.2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.2.dylib; path = usr/lib/libxml2.2.dylib; sourceTree = SDKROOT; };
+		EB5B75B3167A6460000D0F21 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		EB5B75B5167A6470000D0F21 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		EB5B75B8167A6765000D0F21 /* XtifyCordovaPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XtifyCordovaPlugin.h; sourceTree = "<group>"; };
+		EB5B75B9167A6765000D0F21 /* XtifyCordovaPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XtifyCordovaPlugin.m; sourceTree = "<group>"; };
+		EB5B75BB167A6765000D0F21 /* RichDbMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RichDbMessage.h; sourceTree = "<group>"; };
+		EB5B75BC167A6765000D0F21 /* XLappMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLappMgr.h; sourceTree = "<group>"; };
+		EB5B75BD167A6765000D0F21 /* XLCustomInboxMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCustomInboxMgr.h; sourceTree = "<group>"; };
+		EB5B75BE167A6765000D0F21 /* XLhmSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLhmSupport.h; sourceTree = "<group>"; };
+		EB5B75BF167A6765000D0F21 /* XLRichJsonMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLRichJsonMessage.h; sourceTree = "<group>"; };
+		EB5B75C0167A6765000D0F21 /* XLXtifyOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLXtifyOptions.h; sourceTree = "<group>"; };
+		EB5B75C1167A6765000D0F21 /* XLXtifyOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLXtifyOptions.m; sourceTree = "<group>"; };
+		EB5B75C2167A6765000D0F21 /* XtifyGlobal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XtifyGlobal.h; sourceTree = "<group>"; };
+		EB5B75C5167A6765000D0F21 /* chime.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chime.caf; sourceTree = "<group>"; };
+		EB5B75C6167A6765000D0F21 /* ding.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = ding.caf; sourceTree = "<group>"; };
+		EB5B75C7167A6765000D0F21 /* expireMsgTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = expireMsgTemplate.html; sourceTree = "<group>"; };
+		EB5B75C8167A6765000D0F21 /* richnotification.mom */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = richnotification.mom; sourceTree = "<group>"; };
+		EB5B75C9167A6765000D0F21 /* richnotificationV1.15.mom */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = richnotificationV1.15.mom; sourceTree = "<group>"; };
+		EB5B75CA167A6765000D0F21 /* silence.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = silence.caf; sourceTree = "<group>"; };
+		EB5B75CB167A6765000D0F21 /* XtifyPush.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = XtifyPush.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +176,13 @@
 				EB2B71C31677A33700E434AA /* Accounts.framework in Frameworks */,
 				EB2B71C11677A31E00E434AA /* Social.framework in Frameworks */,
 				EB5B757E1678FBBA000D0F21 /* libFlurry.a in Frameworks */,
+				EB5B75B6167A6470000D0F21 /* CoreTelephony.framework in Frameworks */,
+				EB5B75B4167A6460000D0F21 /* libz.1.1.3.dylib in Frameworks */,
+				EB5B75B2167A6454000D0F21 /* libxml2.2.dylib in Frameworks */,
+				EB5B75B0167A6441000D0F21 /* MessageUI.framework in Frameworks */,
+				EB5B75AE167A642A000D0F21 /* CoreData.framework in Frameworks */,
+				EB5B75AC167A641D000D0F21 /* MapKit.framework in Frameworks */,
+				EB5B75D4167A6765000D0F21 /* XtifyPush.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +271,12 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EB5B75B5167A6470000D0F21 /* CoreTelephony.framework */,
+				EB5B75B3167A6460000D0F21 /* libz.1.1.3.dylib */,
+				EB5B75B1167A6454000D0F21 /* libxml2.2.dylib */,
+				EB5B75AF167A6441000D0F21 /* MessageUI.framework */,
+				EB5B75AD167A642A000D0F21 /* CoreData.framework */,
+				EB5B75AB167A641D000D0F21 /* MapKit.framework */,
 				EB2B71C41677A33E00E434AA /* AdSupport.framework */,
 				EB2B71C21677A33700E434AA /* Accounts.framework */,
 				EB2B71C01677A31E00E434AA /* Social.framework */,
@@ -258,6 +309,8 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
+				EB5B75B7167A6765000D0F21 /* XtifyCordovaPlugin */,
+				EB5B75BA167A6765000D0F21 /* XtifyLib */,
 				EB5B757B1678FBBA000D0F21 /* Flurry */,
 				EB5B75771678F99D000D0F21 /* FlurryPlugin */,
 				EB2B71BA1677A14700E434AA /* FacebookConnect */,
@@ -327,6 +380,53 @@
 				EB5B757D1678FBBA000D0F21 /* libFlurry.a */,
 			);
 			path = Flurry;
+			sourceTree = "<group>";
+		};
+		EB5B75B7167A6765000D0F21 /* XtifyCordovaPlugin */ = {
+			isa = PBXGroup;
+			children = (
+				EB5B75B8167A6765000D0F21 /* XtifyCordovaPlugin.h */,
+				EB5B75B9167A6765000D0F21 /* XtifyCordovaPlugin.m */,
+			);
+			path = XtifyCordovaPlugin;
+			sourceTree = "<group>";
+		};
+		EB5B75BA167A6765000D0F21 /* XtifyLib */ = {
+			isa = PBXGroup;
+			children = (
+				EB5B75BB167A6765000D0F21 /* RichDbMessage.h */,
+				EB5B75BC167A6765000D0F21 /* XLappMgr.h */,
+				EB5B75BD167A6765000D0F21 /* XLCustomInboxMgr.h */,
+				EB5B75BE167A6765000D0F21 /* XLhmSupport.h */,
+				EB5B75BF167A6765000D0F21 /* XLRichJsonMessage.h */,
+				EB5B75C0167A6765000D0F21 /* XLXtifyOptions.h */,
+				EB5B75C1167A6765000D0F21 /* XLXtifyOptions.m */,
+				EB5B75C2167A6765000D0F21 /* XtifyGlobal.h */,
+				EB5B75C3167A6765000D0F21 /* XtifyPush.embeddedframework */,
+			);
+			path = XtifyLib;
+			sourceTree = "<group>";
+		};
+		EB5B75C3167A6765000D0F21 /* XtifyPush.embeddedframework */ = {
+			isa = PBXGroup;
+			children = (
+				EB5B75C4167A6765000D0F21 /* Resources */,
+				EB5B75CB167A6765000D0F21 /* XtifyPush.framework */,
+			);
+			path = XtifyPush.embeddedframework;
+			sourceTree = "<group>";
+		};
+		EB5B75C4167A6765000D0F21 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				EB5B75C5167A6765000D0F21 /* chime.caf */,
+				EB5B75C6167A6765000D0F21 /* ding.caf */,
+				EB5B75C7167A6765000D0F21 /* expireMsgTemplate.html */,
+				EB5B75C8167A6765000D0F21 /* richnotification.mom */,
+				EB5B75C9167A6765000D0F21 /* richnotificationV1.15.mom */,
+				EB5B75CA167A6765000D0F21 /* silence.caf */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,6 +516,12 @@
 				3088BBC1154F3926009F9C59 /* Default@2x~iphone.png in Resources */,
 				3088BBC2154F3926009F9C59 /* Default~iphone.png in Resources */,
 				D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */,
+				EB5B75CE167A6765000D0F21 /* chime.caf in Resources */,
+				EB5B75CF167A6765000D0F21 /* ding.caf in Resources */,
+				EB5B75D0167A6765000D0F21 /* expireMsgTemplate.html in Resources */,
+				EB5B75D1167A6765000D0F21 /* richnotification.mom in Resources */,
+				EB5B75D2167A6765000D0F21 /* richnotificationV1.15.mom in Resources */,
+				EB5B75D3167A6765000D0F21 /* silence.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +554,8 @@
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
 				EB2B71BE1677A14700E434AA /* FacebookConnect.m in Sources */,
 				EB5B757A1678F99D000D0F21 /* FlurryPlugin.m in Sources */,
+				EB5B75CC167A6765000D0F21 /* XtifyCordovaPlugin.m in Sources */,
+				EB5B75CD167A6765000D0F21 /* XLXtifyOptions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -507,6 +615,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoSomething/Plugins/FacebookConnect\"",
+					"\"$(SRCROOT)/DoSomething/Plugins/XtifyLib/XtifyPush.embeddedframework\"",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -549,6 +658,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/DoSomething/Plugins/FacebookConnect\"",
+					"\"$(SRCROOT)/DoSomething/Plugins/XtifyLib/XtifyPush.embeddedframework\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "DoSomething/DoSomething-Prefix.pch";

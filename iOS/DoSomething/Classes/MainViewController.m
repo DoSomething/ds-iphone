@@ -34,6 +34,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        
+        xPlugin = [[XtifyCordovaPlugin alloc] init];
     }
     return self;
 }
@@ -128,6 +130,12 @@
         NSString* jsString = [NSString stringWithFormat:@"var invokeString = \"%@\";", self.invokeString];
         [theWebView stringByEvaluatingJavaScriptFromString:jsString];
     }
+    
+    // Xtify plugin setup
+    [self setWv:self.webView];
+    [xPlugin setWv:self.webView];
+    [xPlugin printXtifySDKVersion];
+    [xPlugin triggerWaitingNotif];
 
     // Black base color for background matches the native apps
     theWebView.backgroundColor = [UIColor blackColor];

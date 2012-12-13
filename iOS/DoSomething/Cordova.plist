@@ -72,6 +72,8 @@
 		<string>FacebookConnect</string>
 		<key>FlurryPlugin</key>
 		<string>FlurryPlugin</string>
+		<key>XtifyCordovaPlugin</key>
+		<string>XtifyCordovaPlugin</string>
 	</dict>
 </dict>
 </plist>
