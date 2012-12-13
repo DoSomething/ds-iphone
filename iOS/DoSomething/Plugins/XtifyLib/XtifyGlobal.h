@@ -13,7 +13,7 @@
 // Enter the AppKey assigned to your app at http://console.xtify.com
 // Nothing works without this.
 
-#define xAppKey @"REPLACE_WITH_YOUR_APP_KEY"
+#define xAppKey @"62d3edc5-e5aa-40c3-aeac-33e3f4ce3989"
 
 //
 // Location updates
