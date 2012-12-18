@@ -50,11 +50,6 @@
 
 #pragma UIApplicationDelegate implementation
 
-- (void)applicationDidFinishLaunching:(UIApplication *)application
-{
-    [Flurry startSession:@"FTNTN9VFG7Z9V2QB6S4Q"];
-}
-
 /**
  * This is main kick off after the app inits, the views and Settings are setup here. (preferred - iOS4 and up)
  */
@@ -113,6 +108,8 @@
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+    
+    [Flurry startSession:@"FTNTN9VFG7Z9V2QB6S4Q"];
 
     return YES;
 }
