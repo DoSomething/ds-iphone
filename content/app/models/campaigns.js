@@ -16,15 +16,5 @@ module.exports = Backbone.Collection.extend({
 		})
 		
 	}
-		var obj = $.parseJSON(string);
 
-		var users = obj.users;    
-
-		for x in users {
-		    alert(users[x].Name);
-		    alert(users[x].Value);
-		}
-
-	}
-
-});
+	});
