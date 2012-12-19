@@ -320,7 +320,7 @@ window.require.define({"lib/view_helper": function(exports, require, module) {
 window.require.define({"models/campaign": function(exports, require, module) {
   // Base class for all models.
   module.exports = Backbone.Model.extend({
-     idAttribute:"campaign.gid"
+     //idAttribute:"campaign.gid"
 
     
 
@@ -338,10 +338,17 @@ window.require.define({"models/campaigns": function(exports, require, module) {
   	handle: function(){
 
   		return { "campaigns": this.toJSON() };
-
+  		
+  	},
+  	parse: function(response){
+  		response.forEach(function(a){
+  			
+  			
+  		})
+  		
   	}
 
-  });
+  	});
   
 }});
 
@@ -1202,292 +1209,42 @@ window.require.define({"views/templates/involved": function(exports, require, mo
   function program1(depth0,data) {
     
     var buffer = "", stack1;
-    buffer += "\n			\n			<div data-id=\"bullytext\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.bullytext;
-    stack1 = foundHelper || depth0.bullytext;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    buffer += "\n			\n			<div data-id=\"";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['campaign-name']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.campaign-name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\" class=\"banner\" style=\"background-color:";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "bullytext.campaign.logo-bg-color", { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.logo-bg-color", { hash: {} }); }
     buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.bullytext;
-    stack1 = foundHelper || depth0.bullytext;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "bullytext.campaign.logo-bg-image", { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.logo-bg-image", { hash: {} }); }
     buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.bullytext;
-    stack1 = foundHelper || depth0.bullytext;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "bullytext.campaign.logo", { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.logo", { hash: {} }); }
     buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.bullytext;
-    stack1 = foundHelper || depth0.bullytext;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "bullytext.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"spit\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.spit;
-    stack1 = foundHelper || depth0.spit;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "spit.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.spit;
-    stack1 = foundHelper || depth0.spit;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "spit.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.spit;
-    stack1 = foundHelper || depth0.spit;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "spit.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.spit;
-    stack1 = foundHelper || depth0.spit;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "spit.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"picsforpets\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.picsforpets;
-    stack1 = foundHelper || depth0.picsforpets;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "picsforpets.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.picsforpets;
-    stack1 = foundHelper || depth0.picsforpets;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "picsforpets.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.picsforpets;
-    stack1 = foundHelper || depth0.picsforpets;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "picsforpets.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.picsforpets;
-    stack1 = foundHelper || depth0.picsforpets;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "picsforpets.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"footlocker\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.footlocker;
-    stack1 = foundHelper || depth0.footlocker;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "footlocker.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.footlocker;
-    stack1 = foundHelper || depth0.footlocker;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "footlocker.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.footlocker;
-    stack1 = foundHelper || depth0.footlocker;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "footlocker.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.footlocker;
-    stack1 = foundHelper || depth0.footlocker;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "footlocker.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"vote\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.vote;
-    stack1 = foundHelper || depth0.vote;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "vote.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.vote;
-    stack1 = foundHelper || depth0.vote;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "vote.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.vote;
-    stack1 = foundHelper || depth0.vote;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "vote.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.vote;
-    stack1 = foundHelper || depth0.vote;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "vote.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"staples\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.staples;
-    stack1 = foundHelper || depth0.staples;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "staples.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.staples;
-    stack1 = foundHelper || depth0.staples;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "staples.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.staples;
-    stack1 = foundHelper || depth0.staples;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "staples.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.staples;
-    stack1 = foundHelper || depth0.staples;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "staples.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"thumbwars\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.thumbwars;
-    stack1 = foundHelper || depth0.thumbwars;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "thumbwars.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.thumbwars;
-    stack1 = foundHelper || depth0.thumbwars;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "thumbwars.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.thumbwars;
-    stack1 = foundHelper || depth0.thumbwars;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "thumbwars.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.thumbwars;
-    stack1 = foundHelper || depth0.thumbwars;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "thumbwars.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"hunt\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.hunt;
-    stack1 = foundHelper || depth0.hunt;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "hunt.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.hunt;
-    stack1 = foundHelper || depth0.hunt;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "hunt.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.hunt;
-    stack1 = foundHelper || depth0.hunt;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "hunt.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.hunt;
-    stack1 = foundHelper || depth0.hunt;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "hunt.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"iheartdad\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.iheartdad;
-    stack1 = foundHelper || depth0.iheartdad;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "iheartdad.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.iheartdad;
-    stack1 = foundHelper || depth0.iheartdad;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "iheartdad.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.iheartdad;
-    stack1 = foundHelper || depth0.iheartdad;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "iheartdad.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.iheartdad;
-    stack1 = foundHelper || depth0.iheartdad;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "iheartdad.campaign.call-to-action", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			<div data-id=\"prom\" class=\"banner\" style=\"background-color:";
-    foundHelper = helpers.prom;
-    stack1 = foundHelper || depth0.prom;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "prom.campaign.logo-bg-color", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ";background-image:url(";
-    foundHelper = helpers.prom;
-    stack1 = foundHelper || depth0.prom;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-image']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "prom.campaign.logo-bg-image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\">\n				<div class=\"banner_logo\" style=\"background-image:url(";
-    foundHelper = helpers.prom;
-    stack1 = foundHelper || depth0.prom;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "prom.campaign.logo", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n				<div class=\"call_to_action\">";
-    foundHelper = helpers.prom;
-    stack1 = foundHelper || depth0.prom;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['call-to-action']);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "prom.campaign.call-to-action", { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.call-to-action", { hash: {} }); }
     buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			";
     return buffer;}
 
     buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Get Involved</div>\n</div>\n\n<div id=\"involved_page\" class=\"content_wrapper\">\n	<div id=\"wrapper\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			\n			";
-    foundHelper = helpers.campaigns;
-    stack1 = foundHelper || depth0.campaigns;
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
     stack2 = helpers.each;
     tmp1 = self.program(1, program1, data);
     tmp1.hash = {};

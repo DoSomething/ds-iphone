@@ -6,56 +6,11 @@
 	<div id="wrapper" class="scroll_wrapper">
 		<div id="scroller">
 			
-			{{#each campaigns}}
+			{{#each campaign}}
 			
-			<div data-id="bullytext" class="banner" style="background-color:{{bullytext.campaign.logo-bg-color}};background-image:url({{bullytext.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{bullytext.campaign.logo}})"></div>
-				<div class="call_to_action">{{bullytext.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="spit" class="banner" style="background-color:{{spit.campaign.logo-bg-color}};background-image:url({{spit.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{spit.campaign.logo}})"></div>
-				<div class="call_to_action">{{spit.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="picsforpets" class="banner" style="background-color:{{picsforpets.campaign.logo-bg-color}};background-image:url({{picsforpets.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{picsforpets.campaign.logo}})"></div>
-				<div class="call_to_action">{{picsforpets.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="footlocker" class="banner" style="background-color:{{footlocker.campaign.logo-bg-color}};background-image:url({{footlocker.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{footlocker.campaign.logo}})"></div>
-				<div class="call_to_action">{{footlocker.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="vote" class="banner" style="background-color:{{vote.campaign.logo-bg-color}};background-image:url({{vote.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{vote.campaign.logo}})"></div>
-				<div class="call_to_action">{{vote.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="staples" class="banner" style="background-color:{{staples.campaign.logo-bg-color}};background-image:url({{staples.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{staples.campaign.logo}})"></div>
-				<div class="call_to_action">{{staples.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="thumbwars" class="banner" style="background-color:{{thumbwars.campaign.logo-bg-color}};background-image:url({{thumbwars.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{thumbwars.campaign.logo}})"></div>
-				<div class="call_to_action">{{thumbwars.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="hunt" class="banner" style="background-color:{{hunt.campaign.logo-bg-color}};background-image:url({{hunt.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{hunt.campaign.logo}})"></div>
-				<div class="call_to_action">{{hunt.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="iheartdad" class="banner" style="background-color:{{iheartdad.campaign.logo-bg-color}};background-image:url({{iheartdad.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{iheartdad.campaign.logo}})"></div>
-				<div class="call_to_action">{{iheartdad.campaign.call-to-action}}</div>
-			</div>
-			
-			<div data-id="prom" class="banner" style="background-color:{{prom.campaign.logo-bg-color}};background-image:url({{prom.campaign.logo-bg-image}})">
-				<div class="banner_logo" style="background-image:url({{prom.campaign.logo}})"></div>
-				<div class="call_to_action">{{prom.campaign.call-to-action}}</div>
+			<div data-id="{{campaign.campaign-name}}" class="banner" style="background-color:{{campaign.logo-bg-color}};background-image:url({{campaign.logo-bg-image}})">
+				<div class="banner_logo" style="background-image:url({{campaign.logo}})"></div>
+				<div class="call_to_action">{{campaign.call-to-action}}</div>
 			</div>
 			
 			{{/each}}
