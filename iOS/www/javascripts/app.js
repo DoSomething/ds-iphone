@@ -320,7 +320,7 @@ window.require.define({"lib/view_helper": function(exports, require, module) {
 window.require.define({"models/campaign": function(exports, require, module) {
   // Base class for all models.
   module.exports = Backbone.Model.extend({
-     //idAttribute:"campaign.gid"
+     idAttribute:"campaign.gid"
 
     
 
@@ -374,12 +374,6 @@ window.require.define({"views/about_view": function(exports, require, module) {
     initialize: function() {  
   	
   	 
-  	
-  	
-  	
-  	
-  	
-  	
     },
 
     render: function() {
@@ -500,7 +494,7 @@ window.require.define({"views/involved_view": function(exports, require, module)
   			processData:true,
   			add:true,
   			success:function(){
-  		   Application.involvedView.$el.trigger("dataLoaded");
+  		   	Application.involvedView.$el.trigger("dataLoaded");
   			}
   		});
     },
@@ -526,9 +520,10 @@ window.require.define({"views/involved_view": function(exports, require, module)
   	},
   	
     openCampaign: function(e){
-  		e.preventDefault();
+  	e.preventDefault();
     	var id = $(e.currentTarget).data("id");
-      var item = this.campaignList.campaigns.get(id);
+     	var item = this.id;
+  	alert(item);
       Application.campaignView.item = item.toJSON(); 
       Application.router.navigate("#campaign", {trigger: true});
     },

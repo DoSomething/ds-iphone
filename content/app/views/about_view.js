@@ -10,12 +10,6 @@ module.exports = View.extend({
   initialize: function() {  
 	
 	 
-	
-	
-	
-	
-	
-	
   },
 
   render: function() {

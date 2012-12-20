@@ -20,7 +20,7 @@ module.exports = View.extend({
 			processData:true,
 			add:true,
 			success:function(){
-		   Application.involvedView.$el.trigger("dataLoaded");
+		   	Application.involvedView.$el.trigger("dataLoaded");
 			}
 		});
   },
@@ -46,9 +46,10 @@ module.exports = View.extend({
 	},
 	
   openCampaign: function(e){
-		e.preventDefault();
+	e.preventDefault();
   	var id = $(e.currentTarget).data("id");
-    var item = this.campaignList.campaigns.get(id);
+   	var item = this.id;
+	alert(item);
     Application.campaignView.item = item.toJSON(); 
     Application.router.navigate("#campaign", {trigger: true});
   },
