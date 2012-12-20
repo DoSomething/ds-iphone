@@ -430,26 +430,18 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   	
     },
 
-    render: function() {	
-    	//disable taps on tab again
-    	//$('#gallery_tab').unbind();
-  		this.$el.html(this.template(this.getRenderData()));
-  		this.afterRender();
+    render: function() {
+  		$(this.el).html(this.template(this.item));
     	return this;
     },
 
     enableScroll:function(){
     	var scroll = new iScroll('wrapperCampaign');
     },
-
-    afterRender: function() {
-  	
-  	
-  	},
   	
     campaignChildBrowser:function(){
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-  	},
+  	}
 
   });
   
@@ -488,7 +480,7 @@ window.require.define({"views/guide_view": function(exports, require, module) {
 window.require.define({"views/involved_view": function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/involved');
-  var campaignView = require("views/campaign_view");
+  var campaignView = require('./campaign_view');
   var Campaigns = require('../models/campaigns');
 
   module.exports = View.extend({
@@ -496,7 +488,7 @@ window.require.define({"views/involved_view": function(exports, require, module)
     template: template,
     events: {
   		"dataLoaded":"append",
-  		"tap #campaign1":"openCampaign"
+  		"tap .campaign_thumb":"openCampaign"
   	
   	},
      
@@ -508,7 +500,6 @@ window.require.define({"views/involved_view": function(exports, require, module)
   			processData:true,
   			add:true,
   			success:function(){
-  				alert("wizza");
   		   Application.involvedView.$el.trigger("dataLoaded");
   			}
   		});
@@ -526,7 +517,6 @@ window.require.define({"views/involved_view": function(exports, require, module)
 
     afterRender: function() {
   	
-  	
   	},
 
     append: function(){
@@ -536,9 +526,10 @@ window.require.define({"views/involved_view": function(exports, require, module)
   	},
   	
     openCampaign: function(e){
-  		//e.preventDefault();
-    	//var id = $(e.currentTarget).data("id");
-  		//SEE GALLERY VIEW
+  		e.preventDefault();
+    	var id = $(e.currentTarget).data("id");
+      var item = this.campaignList.campaigns.get(id);
+      Application.campaignView.item = item.toJSON(); 
       Application.router.navigate("#campaign", {trigger: true});
     },
 
@@ -1206,10 +1197,10 @@ window.require.define({"views/templates/involved": function(exports, require, mo
     buffer += "\n			\n			<div data-id=\"";
     foundHelper = helpers.campaign;
     stack1 = foundHelper || depth0.campaign;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['campaign-name']);
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.gid);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.campaign-name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "\" class=\"banner\" style=\"background-color:";
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.gid", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\" class=\"campaign_thumb banner\" style=\"background-color:";
     foundHelper = helpers.campaign;
     stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);

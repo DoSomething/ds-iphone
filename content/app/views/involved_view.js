@@ -1,6 +1,6 @@
 var View = require('./view');
 var template = require('./templates/involved');
-var campaignView = require("views/campaign_view");
+var campaignView = require('./campaign_view');
 var Campaigns = require('../models/campaigns');
 
 module.exports = View.extend({
@@ -8,7 +8,7 @@ module.exports = View.extend({
   template: template,
   events: {
 		"dataLoaded":"append",
-		"tap #campaign1":"openCampaign"
+		"tap .campaign_thumb":"openCampaign"
 	
 	},
    
@@ -20,7 +20,6 @@ module.exports = View.extend({
 			processData:true,
 			add:true,
 			success:function(){
-				alert("wizza");
 		   Application.involvedView.$el.trigger("dataLoaded");
 			}
 		});
@@ -38,7 +37,6 @@ module.exports = View.extend({
 
   afterRender: function() {
 	
-	
 	},
 
   append: function(){
@@ -48,9 +46,10 @@ module.exports = View.extend({
 	},
 	
   openCampaign: function(e){
-		//e.preventDefault();
-  	//var id = $(e.currentTarget).data("id");
-		//SEE GALLERY VIEW
+		e.preventDefault();
+  	var id = $(e.currentTarget).data("id");
+    var item = this.campaignList.campaigns.get(id);
+    Application.campaignView.item = item.toJSON(); 
     Application.router.navigate("#campaign", {trigger: true});
   },
 

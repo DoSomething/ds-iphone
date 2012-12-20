@@ -14,25 +14,17 @@ module.exports = View.extend({
 	
   },
 
-  render: function() {	
-  	//disable taps on tab again
-  	//$('#gallery_tab').unbind();
-		this.$el.html(this.template(this.getRenderData()));
-		this.afterRender();
+  render: function() {
+		$(this.el).html(this.template(this.item));
   	return this;
   },
 
   enableScroll:function(){
   	var scroll = new iScroll('wrapperCampaign');
   },
-
-  afterRender: function() {
-	
-	
-	},
 	
   campaignChildBrowser:function(){
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-	},
+	}
 
 });
