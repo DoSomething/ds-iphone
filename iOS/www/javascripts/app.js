@@ -339,15 +339,8 @@ window.require.define({"models/campaigns": function(exports, require, module) {
 
   		return { "campaigns": this.toJSON() };
   		
-  	},
-  	parse: function(response){
-  		response.forEach(function(a){
-  			
-  			
-  		})
-  		
   	}
-
+  		
   	});
   
 }});
@@ -512,9 +505,10 @@ window.require.define({"views/involved_view": function(exports, require, module)
   		this.campaignList.campaignJSON = {};
   		
   		this.campaignList.fetch({
-  			//processData:true,
+  			processData:true,
   			add:true,
   			success:function(){
+  				alert("wizza");
   		   Application.involvedView.$el.trigger("dataLoaded");
   			}
   		});
@@ -1243,8 +1237,8 @@ window.require.define({"views/templates/involved": function(exports, require, mo
     return buffer;}
 
     buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Get Involved</div>\n</div>\n\n<div id=\"involved_page\" class=\"content_wrapper\">\n	<div id=\"wrapper\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			\n			";
-    foundHelper = helpers.campaign;
-    stack1 = foundHelper || depth0.campaign;
+    foundHelper = helpers.campaigns;
+    stack1 = foundHelper || depth0.campaigns;
     stack2 = helpers.each;
     tmp1 = self.program(1, program1, data);
     tmp1.hash = {};

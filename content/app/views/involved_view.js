@@ -17,9 +17,10 @@ module.exports = View.extend({
 		this.campaignList.campaignJSON = {};
 		
 		this.campaignList.fetch({
-			//processData:true,
+			processData:true,
 			add:true,
 			success:function(){
+				alert("wizza");
 		   Application.involvedView.$el.trigger("dataLoaded");
 			}
 		});

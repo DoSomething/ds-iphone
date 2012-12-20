@@ -8,13 +8,6 @@ module.exports = Backbone.Collection.extend({
 
 		return { "campaigns": this.toJSON() };
 		
-	},
-	parse: function(response){
-		response.forEach(function(a){
-			
-			
-		})
-		
 	}
-
+		
 	});
