@@ -2,6 +2,7 @@
 module.exports = Backbone.Model.extend({
    idAttribute:"campaign.gid"
 
+
   
 
 });

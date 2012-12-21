@@ -22,6 +22,7 @@ module.exports = View.extend({
 			success:function(){
 		   	Application.involvedView.$el.trigger("dataLoaded");
 			}
+            
 		});
   },
 
@@ -47,10 +48,21 @@ module.exports = View.extend({
 	
   openCampaign: function(e){
 	e.preventDefault();
-  	var id = $(e.currentTarget).data("id");
-   	var item = this.id;
-	alert(item);
-    Application.campaignView.item = item.toJSON(); 
+  	var x = $(e.currentTarget).data('id');
+    var cell = 0;
+    
+    for(i=0; i<this.campaignList.campaignJSON.campaigns.length; i++)
+    {
+  
+        if(this.campaignList.campaignJSON.campaigns[i].campaign.gid == x)
+            {
+                cell = i;
+                break;
+            }
+     
+    }
+
+    Application.campaignView.item = this.campaignList.campaignJSON.campaigns[cell]; 
     Application.router.navigate("#campaign", {trigger: true});
   },
 

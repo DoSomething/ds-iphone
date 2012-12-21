@@ -9,13 +9,14 @@ module.exports = View.extend({
 	
 	},
    
-  initialize: function() {  
+  initialize: function() {
+        
 
 	
   },
 
   render: function() {
-		$(this.el).html(this.template(this.item));
+		this.$el.html(this.template(this.item));
   	return this;
   },
 

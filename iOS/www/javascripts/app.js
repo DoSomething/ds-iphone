@@ -322,6 +322,7 @@ window.require.define({"models/campaign": function(exports, require, module) {
   module.exports = Backbone.Model.extend({
      idAttribute:"campaign.gid"
 
+
     
 
   });
@@ -419,13 +420,14 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   	
   	},
      
-    initialize: function() {  
+    initialize: function() {
+          
 
   	
     },
 
     render: function() {
-  		$(this.el).html(this.template(this.item));
+  		this.$el.html(this.template(this.item));
     	return this;
     },
 
@@ -496,6 +498,7 @@ window.require.define({"views/involved_view": function(exports, require, module)
   			success:function(){
   		   	Application.involvedView.$el.trigger("dataLoaded");
   			}
+              
   		});
     },
 
@@ -521,10 +524,21 @@ window.require.define({"views/involved_view": function(exports, require, module)
   	
     openCampaign: function(e){
   	e.preventDefault();
-    	var id = $(e.currentTarget).data("id");
-     	var item = this.id;
-  	alert(item);
-      Application.campaignView.item = item.toJSON(); 
+    	var x = $(e.currentTarget).data('id');
+      var cell = 0;
+      
+      for(i=0; i<this.campaignList.campaignJSON.campaigns.length; i++)
+      {
+    
+          if(this.campaignList.campaignJSON.campaigns[i].campaign.gid == x)
+              {
+                  cell = i;
+                  break;
+              }
+       
+      }
+
+      Application.campaignView.item = this.campaignList.campaignJSON.campaigns[cell]; 
       Application.router.navigate("#campaign", {trigger: true});
     },
 
