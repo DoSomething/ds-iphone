@@ -1180,10 +1180,130 @@ window.require.define({"views/templates/about": function(exports, require, modul
 window.require.define({"views/templates/campaign": function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+  function program1(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">Challenges</div>\n			";}
 
-    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Campaign Name</div>\n</div>\n\n<div id=\"campaign_page\" class=\"content_wrapper\">\n	<div id=\"wrapperCampaign\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"banner\" style=\"height:135px;background-image:url(http://placekitten.com/640/270)\"></div>\n			<div class=\"description\">\n				<div class=\"h2\">July 1st - September 15th</div>\n				<p>Donate school supplies at your local Staples store to support kids in need.</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			<div id=\"campaignBanner\" class=\"banner\" style=\"height:130px;background-image:url(http://placekitten.com/640/260)\"></div> <!-- needs link to child browser -->\n			<div class=\"campaign_link\">Actions</div>\n			<div class=\"campaign_link\">How To</div>\n			<div class=\"campaign_link\">Gallery</div>\n			<div class=\"campaign_link\">Prizes</div>\n			<div class=\"campaign_link\">Resources</div>\n			<div class=\"campaign_link\">FAQ</div>\n		</div>\n	</div>\n</div>";});
+  function program3(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">FAQ</div>\n			";}
+
+  function program5(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">Gallery</div>\n			";}
+
+  function program7(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">How To</div>\n			";}
+
+  function program9(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">Prizes</div>\n			";}
+
+  function program11(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">Resources</div>\n			";}
+
+    buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['campaign-name']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.campaign-name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n</div>\n\n<div id=\"campaign_page\" class=\"content_wrapper\">\n	<div id=\"wrapperCampaign\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"banner\" style=\"height:14px;background-image:url(";
+    foundHelper = helpers.main;
+    stack1 = foundHelper || depth0.main;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.image", { hash: {} }); }
+    buffer += escapeExpression(stack1) + ")\"></div>\n			<div class=\"description\">\n				<div class=\"h2\">";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['start-date']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.start-date", { hash: {} }); }
+    buffer += escapeExpression(stack1) + " - ";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['end-date']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.end-date", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n				<p>";
+    foundHelper = helpers.main;
+    stack1 = foundHelper || depth0.main;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.teaser);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.teaser", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>			\n			\n			<div class=\"campaign_link\">Actions</div>\n			\n			";
+    foundHelper = helpers.challenges;
+    stack1 = foundHelper || depth0.challenges;
+    stack2 = helpers['if'];
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n			";
+    foundHelper = helpers['faq-ios'];
+    stack1 = foundHelper || depth0['faq-ios'];
+    stack2 = helpers['if'];
+    tmp1 = self.program(3, program3, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n			";
+    foundHelper = helpers.gallery;
+    stack1 = foundHelper || depth0.gallery;
+    stack2 = helpers['if'];
+    tmp1 = self.program(5, program5, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n		\n			";
+    foundHelper = helpers['how-to'];
+    stack1 = foundHelper || depth0['how-to'];
+    stack2 = helpers['if'];
+    tmp1 = self.program(7, program7, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n			";
+    foundHelper = helpers.prizes;
+    stack1 = foundHelper || depth0.prizes;
+    stack2 = helpers['if'];
+    tmp1 = self.program(9, program9, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n			";
+    foundHelper = helpers.resources;
+    stack1 = foundHelper || depth0.resources;
+    stack2 = helpers['if'];
+    tmp1 = self.program(11, program11, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n		</div>\n	</div>\n</div>\n";
+    return buffer;});
 }});
 
 window.require.define({"views/templates/home": function(exports, require, module) {
