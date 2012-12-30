@@ -5,14 +5,18 @@
 <div id="campaign_page" class="content_wrapper">
 	<div id="wrapperCampaign" class="scroll_wrapper">
 		<div id="scroller">
-			<div class="banner" style="height:145px;background-image:url({{main.image}})"></div>
+			<div class="banner" style="height:145px;background-image:url({{campaign.logo}});background-color:{{campaign.logo-bg-color}}"></div>
 			<div class="description">
 				<div class="h2">{{campaign.start-date}} - {{campaign.end-date}}</div>
 				<p>{{main.teaser}}</p>
 			</div>
 			<div class="signUp_wrapper">
 				<div class="button yellow_button active_yellow">Sign Up</div> <!-- toggles to Already Signed Up -->
-			</div>			
+			</div>
+			
+			{{#if main.image}}
+			<img class="main_image" src="{{main.image}}"/>
+			{{/if}}
 			
 			<div class="campaign_link">Actions</div>
 			

@@ -1184,30 +1184,42 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
 
   function program1(depth0,data) {
     
-    
-    return "\n			<div class=\"campaign_link\">Challenges</div>\n			";}
+    var buffer = "", stack1;
+    buffer += "\n			<img class=\"main_image\" src=\"";
+    foundHelper = helpers.main;
+    stack1 = foundHelper || depth0.main;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.image", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\"/>\n			";
+    return buffer;}
 
   function program3(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">FAQ</div>\n			";}
+    return "\n			<div class=\"campaign_link\">Challenges</div>\n			";}
 
   function program5(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Gallery</div>\n			";}
+    return "\n			<div class=\"campaign_link\">FAQ</div>\n			";}
 
   function program7(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">How To</div>\n			";}
+    return "\n			<div class=\"campaign_link\">Gallery</div>\n			";}
 
   function program9(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Prizes</div>\n			";}
+    return "\n			<div class=\"campaign_link\">How To</div>\n			";}
 
   function program11(depth0,data) {
+    
+    
+    return "\n			<div class=\"campaign_link\">Prizes</div>\n			";}
+
+  function program13(depth0,data) {
     
     
     return "\n			<div class=\"campaign_link\">Resources</div>\n			";}
@@ -1218,13 +1230,19 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['campaign-name']);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.campaign-name", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</div>\n</div>\n\n<div id=\"campaign_page\" class=\"content_wrapper\">\n	<div id=\"wrapperCampaign\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"banner\" style=\"height:14px;background-image:url(";
-    foundHelper = helpers.main;
-    stack1 = foundHelper || depth0.main;
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+    buffer += escapeExpression(stack1) + "</div>\n</div>\n\n<div id=\"campaign_page\" class=\"content_wrapper\">\n	<div id=\"wrapperCampaign\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"banner\" style=\"height:145px;background-image:url(";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.logo);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.image", { hash: {} }); }
-    buffer += escapeExpression(stack1) + ")\"></div>\n			<div class=\"description\">\n				<div class=\"h2\">";
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.logo", { hash: {} }); }
+    buffer += escapeExpression(stack1) + ");background-color:";
+    foundHelper = helpers.campaign;
+    stack1 = foundHelper || depth0.campaign;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['logo-bg-color']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "campaign.logo-bg-color", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\"></div>\n			<div class=\"description\">\n				<div class=\"h2\">";
     foundHelper = helpers.campaign;
     stack1 = foundHelper || depth0.campaign;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['start-date']);
@@ -1242,11 +1260,22 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.teaser);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.teaser", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>			\n			\n			<div class=\"campaign_link\">Actions</div>\n			\n			";
+    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			\n			";
+    foundHelper = helpers.main;
+    stack1 = foundHelper || depth0.main;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+    stack2 = helpers['if'];
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			\n			<div class=\"campaign_link\">Actions</div>\n			\n			";
     foundHelper = helpers.challenges;
     stack1 = foundHelper || depth0.challenges;
     stack2 = helpers['if'];
-    tmp1 = self.program(1, program1, data);
+    tmp1 = self.program(3, program3, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1256,7 +1285,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers['faq-ios'];
     stack1 = foundHelper || depth0['faq-ios'];
     stack2 = helpers['if'];
-    tmp1 = self.program(3, program3, data);
+    tmp1 = self.program(5, program5, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1266,7 +1295,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers.gallery;
     stack1 = foundHelper || depth0.gallery;
     stack2 = helpers['if'];
-    tmp1 = self.program(5, program5, data);
+    tmp1 = self.program(7, program7, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1276,7 +1305,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers['how-to'];
     stack1 = foundHelper || depth0['how-to'];
     stack2 = helpers['if'];
-    tmp1 = self.program(7, program7, data);
+    tmp1 = self.program(9, program9, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1286,7 +1315,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers.prizes;
     stack1 = foundHelper || depth0.prizes;
     stack2 = helpers['if'];
-    tmp1 = self.program(9, program9, data);
+    tmp1 = self.program(11, program11, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1296,7 +1325,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers.resources;
     stack1 = foundHelper || depth0.resources;
     stack2 = helpers['if'];
-    tmp1 = self.program(11, program11, data);
+    tmp1 = self.program(13, program13, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;

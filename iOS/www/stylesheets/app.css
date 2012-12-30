@@ -603,11 +603,11 @@ select {
   top: 45px;
   background: #000;
 }
-#involved_page .banner {
+.banner {
   position: relative;
   width: 100%;
   height: 120px;
-  background-size: cover;
+  background-size: contain;
   border-bottom: 1px solid #000;
 }
 #involved_page .banner_logo {
@@ -660,6 +660,11 @@ select {
 }
 #campaign_page .banner {
   border: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+#campaign_page .main_image {
+  width: 100%;
 }
 #campaign_page .campaign_link {
   width: 100%;
