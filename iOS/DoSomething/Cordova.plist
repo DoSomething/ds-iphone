@@ -74,6 +74,8 @@
 		<string>FlurryPlugin</string>
 		<key>XtifyCordovaPlugin</key>
 		<string>XtifyCordovaPlugin</string>
+		<key>ChildBrowserCommand</key>
+		<string>ChildBrowserCommand</string>
 	</dict>
 </dict>
 </plist>
