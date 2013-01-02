@@ -416,8 +416,12 @@ window.require.define({"views/campaign_view": function(exports, require, module)
     id: 'campaign-view',
     template: template,
     events: {
-  		"tap #campaignBanner":"campaignChildBrowser"
-  	
+  		"tap #challenges_banner":"campaignChallengesBanner",
+  		"tap #challenges_banner":"campaignFaqBrowser",
+  		"tap #gallery_banner":"campaignGalleryBrowser",
+  		"tap #howto_banner":"campaignHowtoBrowser",
+  		"tap #prizes_banner":"campaignPrizesBrowser",
+  		"tap #resources_banner":"campaignResourceBrowser"
   	},
      
     initialize: function() {
@@ -435,7 +439,10 @@ window.require.define({"views/campaign_view": function(exports, require, module)
     	var scroll = new iScroll('wrapperCampaign');
     },
   	
-    campaignChildBrowser:function(){
+  	campaignFaqBrowser:function(){	
+  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  	},
+  	campaignPrizesBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	}
 
@@ -1197,32 +1204,32 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
   function program3(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Challenges</div>\n			";}
+    return "\n			<div id=\"challenges_banner\" class=\"campaign_link\">Challenges</div>\n			";}
 
   function program5(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">FAQ</div>\n			";}
+    return "\n			<div id=\"faq_banner\" class=\"campaign_link\">FAQ</div>\n			";}
 
   function program7(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Gallery</div>\n			";}
+    return "\n			<div id=\"gallery_banner\" class=\"campaign_link\">Gallery</div>\n			";}
 
   function program9(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">How To</div>\n			";}
+    return "\n			<div id=\"howto_banner\" class=\"campaign_link\">How To</div>\n			";}
 
   function program11(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Prizes</div>\n			";}
+    return "\n			<div id=\"prizes_banner\" class=\"campaign_link\">Prizes</div>\n			";}
 
   function program13(depth0,data) {
     
     
-    return "\n			<div class=\"campaign_link\">Resources</div>\n			";}
+    return "\n			<div id=\"resources_banner\" class=\"campaign_link\">Resources</div>\n			";}
 
     buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">";
     foundHelper = helpers.campaign;

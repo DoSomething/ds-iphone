@@ -5,8 +5,12 @@ module.exports = View.extend({
   id: 'campaign-view',
   template: template,
   events: {
-		"tap #campaignBanner":"campaignChildBrowser"
-	
+		"tap #challenges_banner":"campaignChallengesBanner",
+		"tap #challenges_banner":"campaignFaqBrowser",
+		"tap #gallery_banner":"campaignGalleryBrowser",
+		"tap #howto_banner":"campaignHowtoBrowser",
+		"tap #prizes_banner":"campaignPrizesBrowser",
+		"tap #resources_banner":"campaignResourceBrowser"
 	},
    
   initialize: function() {
@@ -24,7 +28,10 @@ module.exports = View.extend({
   	var scroll = new iScroll('wrapperCampaign');
   },
 	
-  campaignChildBrowser:function(){
+	campaignFaqBrowser:function(){	
+		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	},
+	campaignPrizesBrowser:function(){	
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
 	}
 
