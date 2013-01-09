@@ -239,11 +239,6 @@ input[type="submit"] {
   background: -webkit-linear-gradient(top, #fafafa 0%, #bcbcbc 100%);
   border: 1px solid #ccc;
 }
-.content_wrapper {
-  font-size: 12px;
-  font-family: "League", 'Helvetica Neue', Arial, sans-serif;
-  margin-bottom: 20px;
-}
 #faq_page .question_wrapper {
   position: relative;
   background: #fff;
