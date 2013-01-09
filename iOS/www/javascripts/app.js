@@ -97,6 +97,7 @@ window.require.define({"application": function(exports, require, module) {
   		var CampaignView = require('views/campaign_view');
   		var SessionView = require('views/session_view');
   		var QuizView = require('views/quiz_view');
+  		var AccordianView = require('views/accordian_view');
   		var Router = require('lib/router');  
 
       this.baseURL = 'https://www.dosomething.org/';
@@ -109,6 +110,7 @@ window.require.define({"application": function(exports, require, module) {
       this.campaignView = new CampaignView();
       this.sessionView = new SessionView();
       this.quizView = new QuizView();
+      this.accordianView = new AccordianView();
       this.router = new Router();
 
       if (typeof Object.freeze === 'function') Object.freeze(this);  
@@ -200,7 +202,7 @@ window.require.define({"lib/router": function(exports, require, module) {
 
   module.exports = Backbone.Router.extend({
   	routes: {
-  		'': 'home',
+  		'':'home',
   		'settings':'settings',
   		'involved':'involved',
   		'profile':'profile',
@@ -209,6 +211,7 @@ window.require.define({"lib/router": function(exports, require, module) {
       'login':'login',
       'login_register':'login_register',
       'quiz':'quiz',
+  		'accordian':'accordian'
   	},
   	initialize:function () {
       // Handle back button throughout the application
@@ -216,7 +219,6 @@ window.require.define({"lib/router": function(exports, require, module) {
       	e.preventDefault();
       	$.mobile.activePage.back = true;
       	window.history.back();
-
       });
       this.firstPage = true;
 
@@ -226,30 +228,28 @@ window.require.define({"lib/router": function(exports, require, module) {
 
   		if ( window.localStorage.getItem("launchCount") == "1"){
   			//this.$el.append("");
-  			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>"); 
+  			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div></div>"); 
   		}
 
    	},
     home:function () {
-      this.quiz();
-      return;
       // On initial load of the app, show intro/quiz screens
       if (window.localStorage.getItem('launchCount') == '1') {
-        this.quiz();
+      	this.changePage(Application.quizView);
         window.localStorage.setItem('launchCount', '2');
       }
       // Otherwise, go to campaigns screen
       else {
-        this.involved();
+      	this.changePage(Application.involvedView);
       }
   	},
   	login:function() {
   	  this.changePage(Application.loginView);
-      Application.loginView.enableScroll();
+      //Application.loginView.enableScroll();
   	},
     login_register:function() {
       this.changePage(Application.loginRegisterView);
-      Application.loginRegisterView.enableScroll();
+      //Application.loginRegisterView.enableScroll();
     },
   	involved:function() {
     	this.changePage(Application.involvedView);
@@ -264,12 +264,15 @@ window.require.define({"lib/router": function(exports, require, module) {
       }
       else {
     		this.changePage(Application.profileView);
-    	  Application.profileView.enableScroll();
+    	  //Application.profileView.enableScroll();
       }
   	},
   	campaign:function() {
     	this.changePage(Application.campaignView);
-    	//Application.campaignView.enableScroll();
+    },
+  	accordian:function() {
+    	this.changePage(Application.accordianView);
+    	//Application.accordianView.enableScroll();
     },
   	session:function() {
   		this.changePage(Application.sessionView);
@@ -392,7 +395,7 @@ window.require.define({"views/about_view": function(exports, require, module) {
 
   	},
     enableScroll:function(){
-    		var scroll = new iScroll('aboutScroll');
+    		//var scroll = new iScroll('aboutScroll');
     },
 
     afterRender: function() {
@@ -408,6 +411,39 @@ window.require.define({"views/about_view": function(exports, require, module) {
   
 }});
 
+window.require.define({"views/accordian_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/accordian');
+
+  module.exports = View.extend({
+  	id: 'accordian-view',
+  	template: template,
+  	events: {
+  		"tap .question_wrapper":"openAnswer"
+  	},
+
+  	render: function() {
+  		this.$el.html(this.template(this.item));
+  		this.enableScroll();
+  		return this;
+  	},
+
+  	enableScroll:function(){//Application.accordianView.header
+  		setTimeout(function(){
+  			$('#header_title').html('test');
+  			var wrapperAccordian = new iScroll('wrapperAccordian',{useTransition:true,hScroll:false});
+  		},500);
+  	},
+
+  	openAnswer:function(e) {	
+  		$(e.currentTarget).next().toggle();
+  		$('.item_arrow',e.currentTarget).toggleClass('item_arrow_active');
+  	}
+
+  });
+  
+}});
+
 window.require.define({"views/campaign_view": function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/campaign');
@@ -416,49 +452,46 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   	id: 'campaign-view',
   	template: template,
   	events: {
-  		"tap #challenges_banner":"campaignChallengesBanner",
+  		"tap #challenges_banner":"campaignChallenges",
   		"tap #faq_banner":"campaignFaqBrowser",
   		"tap #gallery_banner":"campaignGalleryBrowser",
-  		"tap #howto_banner":"campaignHowtoBrowser",
+  		"tap #howto_banner":"campaignHowto",
   		"tap #prizes_banner":"campaignPrizesBrowser",
   		"tap #resources_banner":"campaignResourceBrowser"
   	},
 
-  	initialize: function() {
-
-
-
-  	},
-
   	render: function() {
   		this.$el.html(this.template(this.item));
+  		this.enableScroll();
   		return this;
   	},
 
   	enableScroll:function(){
-  		var scroll = new iScroll('wrapperCampaign');
+  		setTimeout(function(){
+  			var wrapperCampaign = new iScroll('wrapperCampaign',{useTransition:true,hScroll:false});
+  		},500);
   	},
 
-  	campaignChallengesBanner:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  	campaignChallenges:function() {		
+  		Application.accordianView.item = this.item['challenges'];  
+  		Application.accordianView.header = "Actions";
+      Application.router.navigate("#accordian", {trigger: true});
+  	},
+  	
+  	campaignHowto:function() {	
+  		Application.accordianView.item = this.item['how-to'];  
+  		Application.accordianView.header = "How To";
+      Application.router.navigate("#accordian", {trigger: true}); 
   	},
 
   	campaignFaqBrowser:function(){	
-  //		alert(this.item.faq_ios.url);
-  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);
-
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
   	},
   	campaignGalleryBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-  	},
-  	campaignHowtoBrowser:function(){	
-  			$('.question_wrapper').click(function(){
-  				$(this).next().toggle();
-  				$('.item_arrow',this).toggleClass('item_arrow_active');
-  			});
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.gallery.feed);
   	},
   	campaignPrizesBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);	
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
   	},
   	campaignResourceBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
@@ -476,23 +509,7 @@ window.require.define({"views/guide_view": function(exports, require, module) {
     id: 'guide-view',
     template: template,
 
-     
-    initialize: function() {  
-  	
-    },
 
-    render: function() {
-    	
-    	//disable taps on tab again
-    	//$('#gallery_tab').unbind();
-  		this.$el.html(this.template(this.getRenderData()));
-  		this.afterRender();
-    	return this;
-
-    },
-    afterRender: function() {
-  	
-  	}
 
   });
   
@@ -510,10 +527,9 @@ window.require.define({"views/involved_view": function(exports, require, module)
     events: {
   		"dataLoaded":"append",
   		"tap .campaign_thumb":"openCampaign"
-  	
   	},
-     
-    initialize: function() {  
+
+    render: function() {	  
   		this.campaignList = new Campaigns();
   		this.campaignList.campaignJSON = {};
   		
@@ -525,21 +541,14 @@ window.require.define({"views/involved_view": function(exports, require, module)
   			}
               
   		});
-    },
-
-    render: function() {	
+  		
   		this.$el.html(this.template(this.campaignList.campaignJSON));
-  		this.afterRender();
     	return this;
     },
 
     enableScroll:function(){
-    	var scroll = new iScroll('wrapper');
+    	var wrapperInvolved = new iScroll('wrapperInvolved',{useTransition:true,hScroll:false});
     },
-
-    afterRender: function() {
-  	
-  	},
 
     append: function(){
     	this.campaignList.campaignJSON = this.campaignList.handle();
@@ -548,7 +557,7 @@ window.require.define({"views/involved_view": function(exports, require, module)
   	},
   	
     openCampaign: function(e){
-  	e.preventDefault();
+  		e.preventDefault();
     	var x = $(e.currentTarget).data('id');
       var cell = 0;
       
@@ -581,23 +590,9 @@ window.require.define({"views/login_register_view": function(exports, require, m
     events: {
       'submit #registerForm': 'loginRegisterSubmit',
     },
-     
-    initialize: function() {  
-
-    },
-
-    render: function() {  
-      this.$el.html(this.template(this.getRenderData()));
-      this.afterRender();
-      return this;
-    },
 
     enableScroll:function(){
-      var scroll = new iScroll('wrapper2');
-    },
-
-    afterRender: function() {
-    
+      //var scroll = new iScroll('wrapper2');
     },
 
     loginRegisterSubmit: function(e) {
@@ -686,11 +681,6 @@ window.require.define({"views/login_view": function(exports, require, module) {
     },
     fbAppId: '525191857506466',
     fbPermissions: ['email', 'user_about_me'],
-
-    render: function() {
-      this.$el.html(this.template(this.getRenderData()));
-      return this;
-    },
 
     login: function(e) {
       e.preventDefault();
@@ -890,17 +880,12 @@ window.require.define({"views/quiz_view": function(exports, require, module) {
     },
 
     pageShow: function(e) {
-      alert('page show');
+      //alert('page show');
     },
 
     initialize: function() {
       this.maxSelectedCauses = 3;
       this.selectedCauses = new Array();
-    },
-
-    render: function() {
-      this.$el.html(this.template(this.getRenderData()));
-      return this;
     },
 
     afterAppend: function() {
@@ -1146,48 +1131,63 @@ window.require.define({"views/settings_view": function(exports, require, module)
   var template = require('./templates/settings');
 
   module.exports = View.extend({
-    id: 'settings-view',
-    template: template,
-    events: {
-      'tap .logout': 'logout',
-    },
-     
-    initialize: function() {  
+  	id: 'settings-view',
+  	template: template,
+  	events: {
+  		'tap #logout': 'logout',
+  		'tap #causes': 'causes',
+  		'tap #terms': 'terms',
+  		'tap #privacy': 'privacy'
+  	},
 
-  	
-    },
+  	initialize: function() {  
 
-    render: function() {	
-    	//disable taps on tab again
-    	//$('#gallery_tab').unbind();
-  		this.$el.html(this.template(this.getRenderData()));
-  		this.afterRender();
-    	return this;
-    },
-
-    afterRender: function() {
 
   	},
 
-    logout: function(e) {
-      $.ajax({
-        url: Application.baseURL + 'rest/user/logout.json',
-        type: 'POST',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
+  	render: function() {	
+  		//disable taps on tab again
+  		//$('#gallery_tab').unbind();
+  		this.$el.html(this.template(this.getRenderData()));
+  		this.afterRender();
+  		return this;
+  	},
 
-        error: function(textStatus, errorThrown) {
-          // TODO handle scenario where user is not logged in
-          alert(JSON.stringify(textStatus));
-        },
+  	afterRender: function() {
 
-        success: function(data) {
-          window.localStorage.setItem("user_logged_in","false");
+  	},
+  	
+  	causes: function() {
+  		
+  	},
+  	terms: function() {
+  		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
+  		
+  	},
+  	privacy: function() {
+  		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
+  		
+  	},
 
-          alert('Logged out');
-        },
-      });
-    }
+  	logout: function(e) {
+  		$.ajax({
+  			url: Application.baseURL + 'rest/user/logout.json',
+  			type: 'POST',
+  			contentType: 'application/json; charset=utf-8',
+  			dataType: 'json',
+
+  			error: function(textStatus, errorThrown) {
+  				// TODO handle scenario where user is not logged in
+  				alert(JSON.stringify(textStatus));
+  			},
+
+  			success: function(data) {
+  				window.localStorage.setItem("user_logged_in","false");
+
+  				alert('Logged out');
+  			},
+  		});
+  	}
 
   });
   
@@ -1200,6 +1200,41 @@ window.require.define({"views/templates/about": function(exports, require, modul
 
 
     return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">About</div>\n</div>\n\n<div id=\"about_page\" class=\"content_wrapper\">\n	<div id=\"aboutScroll\" class=\"scroll_wrapper scroller_down\">\n		<div id=\"scroller\">\n			<div class=\"palette\" style=\"margin-bottom:25px\">\n				<div class=\"text_block\">\n					<div class=\"h2\" style=\"text-transform:uppercase;margin-bottom:5px\">About Pics For Pets</div>\n	\n					<p class=\"h4\">Every year, approximately 3 to 4 million animals in shelters are euthanized simply because they don’t get adopted.</p>\n\n					<div class=\"h3 align_center\">One reason they don’t get adopted? <span style=\"text-decoration:underline\">Bad pictures</span>.</div>\n\n					<p class=\"h4\">Just by taking and sharing a great picture of a shelter animal, you can increase its chance of being adopted. Pics for Pets is a campaign that gives you the tools to take and share great photos of shelter animals to improve their chances of finding a happy home.</p>\n					\n					<p class=\"h4\">Got questions about the campaign? Check out the FAQs or email <a style=\"text-transform:underline;color:#000;\" href=\"mailto:animals@dosomething.org\">animals@dosomething.org</a> (tap and hold to email). </p>\n				</div>\n			</div>\n		</div>\n	</div>\n</div>  ";});
+}});
+
+window.require.define({"views/templates/accordian": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
+
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n			<div class=\"faq_item\">\n				<div class=\"question_wrapper\">\n					<div class=\"question\">";
+    foundHelper = helpers['item-header'];
+    stack1 = foundHelper || depth0['item-header'];
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "item-header", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n					<div class=\"item_arrow\"></div>\n					<div class=\"clear\"></div>\n				</div>\n				<div class=\"answer\">";
+    foundHelper = helpers['item-body'];
+    stack1 = foundHelper || depth0['item-body'];
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "item-body", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n			</div>\n			";
+    return buffer;}
+
+    buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\"></div>\n</div>\n\n<div id=\"accordian_page\" class=\"content_wrapper\">\n	<div id=\"wrapperAccordian\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			";
+    foundHelper = helpers['how-to'];
+    stack1 = foundHelper || depth0['how-to'];
+    stack2 = helpers.each;
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n		</div>\n	</div>\n</div>";
+    return buffer;});
 }});
 
 window.require.define({"views/templates/campaign": function(exports, require, module) {
@@ -1222,7 +1257,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
   function program3(depth0,data) {
     
     
-    return "\n			<div id=\"challenges_banner\" class=\"campaign_link\">Challenges</div>\n			";}
+    return "\n			<div id=\"challenges_banner\" class=\"campaign_link\">Actions</div>\n			";}
 
   function program5(depth0,data) {
     
@@ -1322,7 +1357,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     tmp1.inverse = self.noop;
     stack1 = stack2.call(depth0, stack1, tmp1);
     if(stack1 || stack1 === 0) { buffer += stack1; }
-    buffer += "\n			\n			<div class=\"campaign_link\">Actions</div>\n			\n			";
+    buffer += "\n			\n			";
     foundHelper = helpers.challenges;
     stack1 = foundHelper || depth0.challenges;
     stack2 = helpers['if'];
@@ -1436,7 +1471,7 @@ window.require.define({"views/templates/involved": function(exports, require, mo
     buffer += escapeExpression(stack1) + "</div>\n			</div>\n			\n			";
     return buffer;}
 
-    buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Get Involved</div>\n</div>\n\n<div id=\"involved_page\" class=\"content_wrapper\">\n	<div id=\"wrapper\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			\n			";
+    buffer += "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Get Involved</div>\n</div>\n\n<div id=\"involved_page\" class=\"content_wrapper\">\n	<div id=\"wrapperInvolved\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			\n			";
     foundHelper = helpers.campaigns;
     stack1 = foundHelper || depth0.campaigns;
     stack2 = helpers.each;
@@ -1510,7 +1545,7 @@ window.require.define({"views/templates/settings": function(exports, require, mo
     var foundHelper, self=this;
 
 
-    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Settings</div>\n</div>\n\n<div id=\"settings_page\" class=\"content_wrapper\">\n	<div class=\"button gray_button active_gray\">Your Causes</div>\n	<div class=\"button gray_button active_gray\">Terms of Use</div>\n	<div class=\"button gray_button active_gray\">Privacy Policy</div>\n	<div class=\"button gray_button active_gray logout\">Log Out</div>\n</div>";});
+    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Settings</div>\n</div>\n\n<div id=\"settings_page\" class=\"content_wrapper\">\n	<div id=\"causes\" class=\"button gray_button active_gray\">Your Causes</div>\n	<div id=\"terms\" class=\"button gray_button active_gray\">Terms of Use</div>\n	<div id=\"privacy\" class=\"button gray_button active_gray\">Privacy Policy</div>\n	<div id=\"logout\" class=\"button gray_button active_gray logout\">Log Out</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/spinner": function(exports, require, module) {
