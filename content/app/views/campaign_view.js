@@ -42,7 +42,7 @@ module.exports = View.extend({
     Application.router.navigate("#gallery", {trigger: true});
 	},
 	campaignPrizesBrowser:function(){	
-		//cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
+		cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
 	},
 	campaignResources:function(){	
 		Application.resourcesView.item = this.item;

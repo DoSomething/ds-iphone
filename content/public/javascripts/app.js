@@ -305,6 +305,7 @@ window.require.define({"lib/router": function(exports, require, module) {
   		window.tapReady = false;
   		$(page.el).attr('data-role', 'page');
   		page.render();
+      page.delegateEvents();
   		$('body').append($(page.el));
 
       if (page.afterAppend) {
@@ -501,7 +502,7 @@ window.require.define({"views/campaign_view": function(exports, require, module)
       Application.router.navigate("#gallery", {trigger: true});
   	},
   	campaignPrizesBrowser:function(){	
-  		//cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
   	},
   	campaignResources:function(){	
   		Application.resourcesView.item = this.item;

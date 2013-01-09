@@ -97,6 +97,7 @@ module.exports = Backbone.Router.extend({
 		window.tapReady = false;
 		$(page.el).attr('data-role', 'page');
 		page.render();
+    page.delegateEvents();
 		$('body').append($(page.el));
 
     if (page.afterAppend) {
