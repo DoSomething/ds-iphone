@@ -49,6 +49,7 @@ module.exports = View.extend({
 
 			error: function(textStatus, errorThrown) {
 				// TODO handle scenario where user is not logged in
+				window.localStorage.setItem("user_logged_in","false");
 				alert(JSON.stringify(textStatus));
 			},
 

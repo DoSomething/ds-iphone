@@ -2,7 +2,7 @@ var application = require('application');
 
 module.exports = Backbone.Router.extend({
 	routes: {
-		'':'quiz',
+		'':'home',
 		'settings':'settings',
 		'involved':'involved',
 		'profile':'profile',

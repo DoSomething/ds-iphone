@@ -213,6 +213,12 @@ p {
   font-size: 14px;
   line-height: 18px;
 }
+h2 {
+  font-weight: normal;
+  padding: 0 10px 10px 10px;
+  border-bottom: 1px solid #000;
+  line-height: 24px;
+}
 .centered {
   margin-left: auto;
   margin-right: auto;
@@ -239,12 +245,12 @@ input[type="submit"] {
   background: -webkit-linear-gradient(top, #fafafa 0%, #bcbcbc 100%);
   border: 1px solid #ccc;
 }
-#faq_page .question_wrapper {
+#accordian_page .question_wrapper {
   position: relative;
   background: #fff;
   border-bottom: 1px solid #000;
 }
-#faq_page .question {
+#accordian_page .question {
   float: left;
   padding: 8px 0 0 10px;
   font-size: 20px;
@@ -253,18 +259,18 @@ input[type="submit"] {
   height: 40px;
   color: #000;
 }
-#faq_page .answer {
+#accordian_page .answer {
   font-size: 18px;
   line-height: 24px;
   padding: 8px 15px;
   background: #efefef;
   border-bottom: 2px solid #000;
 }
-#faq_page .item_arrow {
+#accordian_page .item_arrow {
   top: 15px;
 }
-#faq_page .item_arrow_active {
-  background-image: url("images/list_arrow_down.png");
+#accordian_page .item_arrow_active {
+  background-image: url("../images/list_arrow_down.png");
 }
 .item_arrow {
   position: absolute;
@@ -272,7 +278,7 @@ input[type="submit"] {
   right: 15px;
   width: 16px;
   height: 16px;
-  background-image: url("images/list_arrow.png");
+  background-image: url("../images/list_arrow.png");
   background-size: contain;
 }
 .faq_item {
@@ -896,6 +902,17 @@ select {
   width: 80%;
   height: 40px;
   line-height: 40px;
+}
+.galleryItem {
+  float: left;
+  width: 33.33%;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+.gallery_full_image {
+  width: 100%;
 }
 /* SPINNER ******************************/
 .spinnerModal {

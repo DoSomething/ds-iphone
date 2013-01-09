@@ -210,7 +210,7 @@ window.require.define({"lib/router": function(exports, require, module) {
 
   module.exports = Backbone.Router.extend({
   	routes: {
-  		'':'quiz',
+  		'':'home',
   		'settings':'settings',
   		'involved':'involved',
   		'profile':'profile',
@@ -807,6 +807,7 @@ window.require.define({"views/login_view": function(exports, require, module) {
         },
 
         success: function(data) {
+          console.log(data);
           Application.loginView.finishLogin();
         },
       });
@@ -1311,6 +1312,7 @@ window.require.define({"views/settings_view": function(exports, require, module)
 
   			error: function(textStatus, errorThrown) {
   				// TODO handle scenario where user is not logged in
+  				window.localStorage.setItem("user_logged_in","false");
   				alert(JSON.stringify(textStatus));
   			},
 
