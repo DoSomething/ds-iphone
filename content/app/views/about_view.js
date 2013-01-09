@@ -27,7 +27,7 @@ module.exports = View.extend({
 
 	},
   enableScroll:function(){
-  		var scroll = new iScroll('aboutScroll');
+  		//var scroll = new iScroll('aboutScroll');
   },
 
   afterRender: function() {

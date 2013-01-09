@@ -9,10 +9,9 @@ module.exports = View.extend({
   events: {
 		"dataLoaded":"append",
 		"tap .campaign_thumb":"openCampaign"
-	
 	},
-   
-  initialize: function() {  
+
+  render: function() {	  
 		this.campaignList = new Campaigns();
 		this.campaignList.campaignJSON = {};
 		
@@ -24,21 +23,14 @@ module.exports = View.extend({
 			}
             
 		});
-  },
-
-  render: function() {	
+		
 		this.$el.html(this.template(this.campaignList.campaignJSON));
-		this.afterRender();
   	return this;
   },
 
   enableScroll:function(){
-  	var scroll = new iScroll('wrapper');
+  	var wrapperInvolved = new iScroll('wrapperInvolved',{useTransition:true,hScroll:false});
   },
-
-  afterRender: function() {
-	
-	},
 
   append: function(){
   	this.campaignList.campaignJSON = this.campaignList.handle();
@@ -47,7 +39,7 @@ module.exports = View.extend({
 	},
 	
   openCampaign: function(e){
-	e.preventDefault();
+		e.preventDefault();
   	var x = $(e.currentTarget).data('id');
     var cell = 0;
     

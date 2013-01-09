@@ -5,49 +5,46 @@ module.exports = View.extend({
 	id: 'campaign-view',
 	template: template,
 	events: {
-		"tap #challenges_banner":"campaignChallengesBanner",
+		"tap #challenges_banner":"campaignChallenges",
 		"tap #faq_banner":"campaignFaqBrowser",
 		"tap #gallery_banner":"campaignGalleryBrowser",
-		"tap #howto_banner":"campaignHowtoBrowser",
+		"tap #howto_banner":"campaignHowto",
 		"tap #prizes_banner":"campaignPrizesBrowser",
 		"tap #resources_banner":"campaignResourceBrowser"
 	},
 
-	initialize: function() {
-
-
-
-	},
-
 	render: function() {
 		this.$el.html(this.template(this.item));
+		this.enableScroll();
 		return this;
 	},
 
 	enableScroll:function(){
-		var scroll = new iScroll('wrapperCampaign');
+		setTimeout(function(){
+			var wrapperCampaign = new iScroll('wrapperCampaign',{useTransition:true,hScroll:false});
+		},500);
 	},
 
-	campaignChallengesBanner:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	campaignChallenges:function() {		
+		Application.accordianView.item = this.item['challenges'];  
+		Application.accordianView.header = "Actions";
+    Application.router.navigate("#accordian", {trigger: true});
+	},
+	
+	campaignHowto:function() {	
+		Application.accordianView.item = this.item['how-to'];  
+		Application.accordianView.header = "How To";
+    Application.router.navigate("#accordian", {trigger: true}); 
 	},
 
 	campaignFaqBrowser:function(){	
-//		alert(this.item.faq_ios.url);
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);
-
+		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
 	},
 	campaignGalleryBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-	},
-	campaignHowtoBrowser:function(){	
-			$('.question_wrapper').click(function(){
-				$(this).next().toggle();
-				$('.item_arrow',this).toggleClass('item_arrow_active');
-			});
+		cordova.exec("ChildBrowserCommand.showWebPage", this.item.gallery.feed);
 	},
 	campaignPrizesBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);	
+		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
 	},
 	campaignResourceBrowser:function(){	
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );

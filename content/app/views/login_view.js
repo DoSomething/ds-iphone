@@ -12,11 +12,6 @@ module.exports = View.extend({
   fbAppId: '525191857506466',
   fbPermissions: ['email', 'user_about_me'],
 
-  render: function() {
-    this.$el.html(this.template(this.getRenderData()));
-    return this;
-  },
-
   login: function(e) {
     e.preventDefault();
     e.stopPropagation();

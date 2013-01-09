@@ -24,17 +24,12 @@ module.exports = View.extend({
   },
 
   pageShow: function(e) {
-    alert('page show');
+    //alert('page show');
   },
 
   initialize: function() {
     this.maxSelectedCauses = 3;
     this.selectedCauses = new Array();
-  },
-
-  render: function() {
-    this.$el.html(this.template(this.getRenderData()));
-    return this;
   },
 
   afterAppend: function() {

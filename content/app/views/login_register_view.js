@@ -7,23 +7,9 @@ module.exports = View.extend({
   events: {
     'submit #registerForm': 'loginRegisterSubmit',
   },
-   
-  initialize: function() {  
-
-  },
-
-  render: function() {  
-    this.$el.html(this.template(this.getRenderData()));
-    this.afterRender();
-    return this;
-  },
 
   enableScroll:function(){
-    var scroll = new iScroll('wrapper2');
-  },
-
-  afterRender: function() {
-  
+    //var scroll = new iScroll('wrapper2');
   },
 
   loginRegisterSubmit: function(e) {

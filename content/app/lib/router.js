@@ -2,7 +2,7 @@ var application = require('application');
 
 module.exports = Backbone.Router.extend({
 	routes: {
-		'': 'home',
+		'':'home',
 		'settings':'settings',
 		'involved':'involved',
 		'profile':'profile',
@@ -11,6 +11,7 @@ module.exports = Backbone.Router.extend({
     'login':'login',
     'login_register':'login_register',
     'quiz':'quiz',
+		'accordian':'accordian'
 	},
 	initialize:function () {
     // Handle back button throughout the application
@@ -18,7 +19,6 @@ module.exports = Backbone.Router.extend({
     	e.preventDefault();
     	$.mobile.activePage.back = true;
     	window.history.back();
-
     });
     this.firstPage = true;
 
@@ -28,30 +28,28 @@ module.exports = Backbone.Router.extend({
 
 		if ( window.localStorage.getItem("launchCount") == "1"){
 			//this.$el.append("");
-			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div>   </div>"); 
+			$('body').append("<div class='eduModal'><div id='edu-wrapper'></div></div>"); 
 		}
 
  	},
   home:function () {
-    this.quiz();
-    return;
     // On initial load of the app, show intro/quiz screens
     if (window.localStorage.getItem('launchCount') == '1') {
-      this.quiz();
+    	this.changePage(Application.quizView);
       window.localStorage.setItem('launchCount', '2');
     }
     // Otherwise, go to campaigns screen
     else {
-      this.involved();
+    	this.changePage(Application.involvedView);
     }
 	},
 	login:function() {
 	  this.changePage(Application.loginView);
-    Application.loginView.enableScroll();
+    //Application.loginView.enableScroll();
 	},
   login_register:function() {
     this.changePage(Application.loginRegisterView);
-    Application.loginRegisterView.enableScroll();
+    //Application.loginRegisterView.enableScroll();
   },
 	involved:function() {
   	this.changePage(Application.involvedView);
@@ -66,12 +64,15 @@ module.exports = Backbone.Router.extend({
     }
     else {
   		this.changePage(Application.profileView);
-  	  Application.profileView.enableScroll();
+  	  //Application.profileView.enableScroll();
     }
 	},
 	campaign:function() {
   	this.changePage(Application.campaignView);
-  	//Application.campaignView.enableScroll();
+  },
+	accordian:function() {
+  	this.changePage(Application.accordianView);
+  	//Application.accordianView.enableScroll();
   },
 	session:function() {
 		this.changePage(Application.sessionView);
