@@ -413,9 +413,9 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   var template = require('./templates/campaign');
 
   module.exports = View.extend({
-    id: 'campaign-view',
-    template: template,
-    events: {
+  	id: 'campaign-view',
+  	template: template,
+  	events: {
   		"tap #challenges_banner":"campaignChallengesBanner",
   		"tap #faq_banner":"campaignFaqBrowser",
   		"tap #gallery_banner":"campaignGalleryBrowser",
@@ -423,28 +423,30 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		"tap #prizes_banner":"campaignPrizesBrowser",
   		"tap #resources_banner":"campaignResourceBrowser"
   	},
-     
-    initialize: function() {
-          
 
-  	
-    },
+  	initialize: function() {
 
-    render: function() {
+
+
+  	},
+
+  	render: function() {
   		this.$el.html(this.template(this.item));
-    	return this;
-    },
+  		return this;
+  	},
 
-    enableScroll:function(){
-    	var scroll = new iScroll('wrapperCampaign');
-    },
-  	
+  	enableScroll:function(){
+  		var scroll = new iScroll('wrapperCampaign');
+  	},
+
   	campaignChallengesBanner:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	},
+
   	campaignFaqBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-  		alert(data.id);
+  		alert(this.item.faq_ios.url);
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);
+
   	},
   	campaignGalleryBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
@@ -453,7 +455,8 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	},
   	campaignPrizesBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  		alert(this.item.faq_ios.url);
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);	
   	},
   	campaignResourceBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
@@ -1221,15 +1224,8 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
 
   function program5(depth0,data) {
     
-    var buffer = "", stack1;
-    buffer += "\n			<div id=\"faq_banner\" data-id= ";
-    foundHelper = helpers['faq-ios'];
-    stack1 = foundHelper || depth0['faq-ios'];
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.url);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "faq-ios.url", { hash: {} }); }
-    buffer += escapeExpression(stack1) + " class=\"campaign_link\">FAQ</div>\n			";
-    return buffer;}
+    
+    return "\n			<div id=\"faq_banner\" class=\"campaign_link\">FAQ</div>\n			";}
 
   function program7(depth0,data) {
     

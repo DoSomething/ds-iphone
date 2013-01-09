@@ -443,8 +443,10 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	},
   	campaignFaqBrowser:function(){	
+  		alert("data.id");
+  		alert(this.item.faq-ios.url);
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
-  		alert(data.id);
+
   	},
   	campaignGalleryBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
@@ -1221,15 +1223,8 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
 
   function program5(depth0,data) {
     
-    var buffer = "", stack1;
-    buffer += "\n			<div id=\"faq_banner\" data-id= ";
-    foundHelper = helpers['faq-ios'];
-    stack1 = foundHelper || depth0['faq-ios'];
-    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.url);
-    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
-    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "faq-ios.url", { hash: {} }); }
-    buffer += escapeExpression(stack1) + " class=\"campaign_link\">FAQ</div>\n			";
-    return buffer;}
+    
+    return "\n			<div id=\"faq_banner\" class=\"campaign_link\">FAQ</div>\n			";}
 
   function program7(depth0,data) {
     
