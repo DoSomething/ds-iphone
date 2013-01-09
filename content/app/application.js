@@ -20,7 +20,11 @@ Application = {
 		var CampaignView = require('views/campaign_view');
 		var SessionView = require('views/session_view');
 		var QuizView = require('views/quiz_view');
-		var AccordianView = require('views/accordian_view');
+		var ActionsView = require('views/actions_view');
+		var HowToView = require('views/howto_view');
+		var ResourcesView = require('views/resources_view');
+		var GalleryView = require('views/gallery_view');
+		var ImageView = require('views/image_view');
 		var Router = require('lib/router');  
 
     this.baseURL = 'https://www.dosomething.org/';
@@ -33,7 +37,11 @@ Application = {
     this.campaignView = new CampaignView();
     this.sessionView = new SessionView();
     this.quizView = new QuizView();
-    this.accordianView = new AccordianView();
+    this.actionsView = new ActionsView();
+    this.howToView = new HowToView();
+    this.resourcesView = new ResourcesView();
+    this.galleryView = new GalleryView();
+    this.imageView = new ImageView();
     this.router = new Router();
 
     if (typeof Object.freeze === 'function') Object.freeze(this);  

@@ -9,7 +9,9 @@ module.exports = View.extend({
   },
 
   enableScroll:function(){
-    //var scroll = new iScroll('wrapper2');
+		setTimeout(function(){
+    	var scroll = new iScroll('wrapper2');
+		},500);
   },
 
   loginRegisterSubmit: function(e) {

@@ -7,10 +7,10 @@ module.exports = View.extend({
 	events: {
 		"tap #challenges_banner":"campaignChallenges",
 		"tap #faq_banner":"campaignFaqBrowser",
-		"tap #gallery_banner":"campaignGalleryBrowser",
+		"tap #gallery_banner":"campaignGallery",
 		"tap #howto_banner":"campaignHowto",
 		"tap #prizes_banner":"campaignPrizesBrowser",
-		"tap #resources_banner":"campaignResourceBrowser"
+		"tap #resources_banner":"campaignResources"
 	},
 
 	render: function() {
@@ -26,28 +26,27 @@ module.exports = View.extend({
 	},
 
 	campaignChallenges:function() {		
-		Application.accordianView.item = this.item['challenges'];  
-		Application.accordianView.header = "Actions";
-    Application.router.navigate("#accordian", {trigger: true});
+		Application.actionsView.item = this.item;  
+    Application.router.navigate("#actions", {trigger: true});
 	},
 	
 	campaignHowto:function() {	
-		Application.accordianView.item = this.item['how-to'];  
-		Application.accordianView.header = "How To";
-    Application.router.navigate("#accordian", {trigger: true}); 
+		Application.howToView.item = this.item;  
+    Application.router.navigate("#howto", {trigger: true}); 
 	},
 
 	campaignFaqBrowser:function(){	
 		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
 	},
-	campaignGalleryBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item.gallery.feed);
+	campaignGallery:function(){	
+    Application.router.navigate("#gallery", {trigger: true});
 	},
 	campaignPrizesBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
+		//cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);	
 	},
-	campaignResourceBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	campaignResources:function(){	
+		Application.resourcesView.item = this.item;
+    Application.router.navigate("#resources", {trigger: true}); 
 	}
 
 });

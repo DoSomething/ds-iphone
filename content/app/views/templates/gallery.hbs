@@ -1,0 +1,15 @@
+<div id="header">
+	<div class="back_button"></div>
+	<div id="header_title" class="title">Gallery</div>
+</div>
+
+<div id="gallery_page" class="content_wrapper">
+	<div id="wrapperGallery" class="scroll_wrapper">
+		<div id="scroller">
+			{{each image_items }}
+			<div class="galleryItem" data-url="{{ image_item.image }}" style="background-image:url({{ image_item.thumbnail }})"></div>
+			{{/each}}
+			<div class="clear"></div>
+		</div>
+	</div>
+</div>

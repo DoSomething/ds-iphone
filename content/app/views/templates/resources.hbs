@@ -1,0 +1,20 @@
+<div id="header">
+	<div class="back_button"></div>
+	<div id="header_title" class="title">How To</div>
+</div>
+
+<div id="accordian_page" class="content_wrapper">
+	<div id="wrapperAccordian" class="scroll_wrapper">
+		<div id="scroller">
+			{{#each resources}}
+			<div class="faq_item" data-url="{{item-link}}">
+				<div class="question_wrapper">
+					<div class="question">{{item-body}}</div>
+					<div class="item_arrow"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+	</div>
+</div>

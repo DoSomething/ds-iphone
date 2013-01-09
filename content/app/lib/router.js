@@ -2,7 +2,7 @@ var application = require('application');
 
 module.exports = Backbone.Router.extend({
 	routes: {
-		'':'home',
+		'':'quiz',
 		'settings':'settings',
 		'involved':'involved',
 		'profile':'profile',
@@ -11,7 +11,11 @@ module.exports = Backbone.Router.extend({
     'login':'login',
     'login_register':'login_register',
     'quiz':'quiz',
-		'accordian':'accordian'
+		'actions':'actions',
+		'howto':'howto',
+		'resources':'resources',
+		'gallery':'gallery',
+		'image':'image'
 	},
 	initialize:function () {
     // Handle back button throughout the application
@@ -33,27 +37,23 @@ module.exports = Backbone.Router.extend({
 
  	},
   home:function () {
-    // On initial load of the app, show intro/quiz screens
     if (window.localStorage.getItem('launchCount') == '1') {
     	this.changePage(Application.quizView);
       window.localStorage.setItem('launchCount', '2');
     }
-    // Otherwise, go to campaigns screen
     else {
     	this.changePage(Application.involvedView);
     }
 	},
 	login:function() {
 	  this.changePage(Application.loginView);
-    //Application.loginView.enableScroll();
 	},
   login_register:function() {
     this.changePage(Application.loginRegisterView);
-    //Application.loginRegisterView.enableScroll();
+		Application.loginRegisterView.enableScroll();
   },
 	involved:function() {
   	this.changePage(Application.involvedView);
-  	//Application.involvedView.enableScroll();
   },
 	settings:function() {
 	  this.changePage(Application.settingsView);
@@ -70,9 +70,20 @@ module.exports = Backbone.Router.extend({
 	campaign:function() {
   	this.changePage(Application.campaignView);
   },
-	accordian:function() {
-  	this.changePage(Application.accordianView);
-  	//Application.accordianView.enableScroll();
+	actions:function() {
+  	this.changePage(Application.actionsView);
+  },
+	howto:function() {
+  	this.changePage(Application.howToView);
+  },
+	resources:function() {
+  	this.changePage(Application.resourcesView);
+  },
+	gallery:function() {
+  	this.changePage(Application.galleryView);
+  },
+	image:function() {
+  	this.changePage(Application.imageView);
   },
 	session:function() {
 		this.changePage(Application.sessionView);
