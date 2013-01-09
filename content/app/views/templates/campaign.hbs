@@ -33,7 +33,21 @@
 			{{/if}}
 		
 			{{#if how-to}}
+
 			<div id="howto_banner" class="campaign_link">How To</div>
+			{{#each how-to}}
+			<div id="faq_page" class="content_wrapper">
+						<div class="faq_item">
+							<div class="question_wrapper">
+								<div class="question">{{item-header}}</div>
+								<div class="item_arrow"></div>
+								<div class="clear"></div>
+							</div>
+							<div class="answer">{{item-body}} </div>
+						</div>
+					</div>						
+			{{/each}}
+
 			{{/if}}
 			
 			{{#if prizes}}

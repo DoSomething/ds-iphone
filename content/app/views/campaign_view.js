@@ -33,7 +33,7 @@ module.exports = View.extend({
 	},
 
 	campaignFaqBrowser:function(){	
-		alert(this.item.faq_ios.url);
+//		alert(this.item.faq_ios.url);
 		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);
 
 	},
@@ -41,10 +41,12 @@ module.exports = View.extend({
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
 	},
 	campaignHowtoBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+			$('.question_wrapper').click(function(){
+				$(this).next().toggle();
+				$('.item_arrow',this).toggleClass('item_arrow_active');
+			});
 	},
 	campaignPrizesBrowser:function(){	
-		alert(this.item.faq_ios.url);
 		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);	
 	},
 	campaignResourceBrowser:function(){	

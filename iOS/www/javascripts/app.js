@@ -413,9 +413,9 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   var template = require('./templates/campaign');
 
   module.exports = View.extend({
-    id: 'campaign-view',
-    template: template,
-    events: {
+  	id: 'campaign-view',
+  	template: template,
+  	events: {
   		"tap #challenges_banner":"campaignChallengesBanner",
   		"tap #faq_banner":"campaignFaqBrowser",
   		"tap #gallery_banner":"campaignGalleryBrowser",
@@ -423,39 +423,42 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		"tap #prizes_banner":"campaignPrizesBrowser",
   		"tap #resources_banner":"campaignResourceBrowser"
   	},
-     
-    initialize: function() {
-          
 
-  	
-    },
+  	initialize: function() {
 
-    render: function() {
+
+
+  	},
+
+  	render: function() {
   		this.$el.html(this.template(this.item));
-    	return this;
-    },
+  		return this;
+  	},
 
-    enableScroll:function(){
-    	var scroll = new iScroll('wrapperCampaign');
-    },
-  	
+  	enableScroll:function(){
+  		var scroll = new iScroll('wrapperCampaign');
+  	},
+
   	campaignChallengesBanner:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	},
+
   	campaignFaqBrowser:function(){	
-  		alert("data.id");
-  		alert(this.item.faq-ios.url);
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  //		alert(this.item.faq_ios.url);
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);
 
   	},
   	campaignGalleryBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
   	},
   	campaignHowtoBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  			$('.question_wrapper').click(function(){
+  				$(this).next().toggle();
+  				$('.item_arrow',this).toggleClass('item_arrow_active');
+  			});
   	},
   	campaignPrizesBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+  		cordova.exec("ChildBrowserCommand.showWebPage", this.item.faq_ios.url);	
   	},
   	campaignResourceBrowser:function(){	
   		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
@@ -1233,15 +1236,41 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
 
   function program9(depth0,data) {
     
+    var buffer = "", stack1, stack2;
+    buffer += "\n\n			<div id=\"howto_banner\" class=\"campaign_link\">How To</div>\n			";
+    foundHelper = helpers['how-to'];
+    stack1 = foundHelper || depth0['how-to'];
+    stack2 = helpers.each;
+    tmp1 = self.program(10, program10, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n			";
+    return buffer;}
+  function program10(depth0,data) {
     
-    return "\n			<div id=\"howto_banner\" class=\"campaign_link\">How To</div>\n			";}
+    var buffer = "", stack1;
+    buffer += "\n			<div id=\"faq_page\" class=\"content_wrapper\">\n						<div class=\"faq_item\">\n							<div class=\"question_wrapper\">\n								<div class=\"question\">";
+    foundHelper = helpers['item-header'];
+    stack1 = foundHelper || depth0['item-header'];
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "item-header", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n								<div class=\"item_arrow\"></div>\n								<div class=\"clear\"></div>\n							</div>\n							<div class=\"answer\">";
+    foundHelper = helpers['item-body'];
+    stack1 = foundHelper || depth0['item-body'];
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "item-body", { hash: {} }); }
+    buffer += escapeExpression(stack1) + " </div>\n						</div>\n					</div>						\n			";
+    return buffer;}
 
-  function program11(depth0,data) {
+  function program12(depth0,data) {
     
     
     return "\n			<div id=\"prizes_banner\" class=\"campaign_link\">Prizes</div>\n			";}
 
-  function program13(depth0,data) {
+  function program14(depth0,data) {
     
     
     return "\n			<div id=\"resources_banner\" class=\"campaign_link\">Resources</div>\n			";}
@@ -1337,7 +1366,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers.prizes;
     stack1 = foundHelper || depth0.prizes;
     stack2 = helpers['if'];
-    tmp1 = self.program(11, program11, data);
+    tmp1 = self.program(12, program12, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;
@@ -1347,7 +1376,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     foundHelper = helpers.resources;
     stack1 = foundHelper || depth0.resources;
     stack2 = helpers['if'];
-    tmp1 = self.program(13, program13, data);
+    tmp1 = self.program(14, program14, data);
     tmp1.hash = {};
     tmp1.fn = tmp1;
     tmp1.inverse = self.noop;

@@ -259,7 +259,6 @@ input[type="submit"] {
   padding: 8px 15px;
   background: #efefef;
   border-bottom: 2px solid #000;
-  display: none;
 }
 #faq_page .item_arrow {
   top: 15px;
