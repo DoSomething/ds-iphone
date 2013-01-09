@@ -239,6 +239,46 @@ input[type="submit"] {
   background: -webkit-linear-gradient(top, #fafafa 0%, #bcbcbc 100%);
   border: 1px solid #ccc;
 }
+#faq_page .question_wrapper {
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid #000;
+}
+#faq_page .question {
+  float: left;
+  padding: 8px 0 0 10px;
+  font-size: 20px;
+  line-height: 32px;
+  width: 86%;
+  height: 40px;
+  color: #000;
+}
+#faq_page .answer {
+  font-size: 18px;
+  line-height: 24px;
+  padding: 8px 15px;
+  background: #efefef;
+  border-bottom: 2px solid #000;
+  display: none;
+}
+#faq_page .item_arrow {
+  top: 15px;
+}
+#faq_page .item_arrow_active {
+  background-image: url("images/list_arrow_down.png");
+}
+.item_arrow {
+  position: absolute;
+  top: 24px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background-image: url("images/list_arrow.png");
+  background-size: contain;
+}
+.faq_item {
+  width: 100%;
+}
 .disabled_button {
   color: #999;
 }
@@ -498,7 +538,7 @@ input[type="submit"] {
   background: #1e1d1c;
   border-top: 10px solid #18408b;
 }
-#login_page input[type="text"],
+#login_page input[type="password"],
 #login_page input[type="email"] {
   margin-left: 13px;
   margin-top: 5px;
@@ -542,7 +582,8 @@ input[type="submit"] {
 #register_page input[type="email"],
 #register_page input[type="number"],
 #register_page input[type="tel"],
-#register_page input[type="date"] {
+#register_page input[type="date"],
+#register_page input[type="password"] {
   margin: 0;
   width: 94%;
   padding: 4px 0 4px 10px;
@@ -557,7 +598,12 @@ input[type="submit"] {
   width: 128px;
   height: 30px;
   line-height: 33px;
-  font-size: 16px;
+  font-size: 18px;
+}
+#register_page .little_info {
+  font-size: 18px;
+  margin: 10px auto;
+  width: 92%;
 }
 #register_page input[type="submit"] {
   width: 130px;
@@ -568,7 +614,8 @@ input[type="text"],
 input[type="email"],
 input[type="number"],
 input[type="tel"],
-input[type="date"] {
+input[type="date"],
+input[type="password"] {
   font-size: 16px;
 }
 input[type="submit"] {
@@ -596,11 +643,11 @@ select {
   top: 45px;
   background: #000;
 }
-#involved_page .banner {
+.banner {
   position: relative;
   width: 100%;
   height: 120px;
-  background-size: cover;
+  background-size: contain;
   border-bottom: 1px solid #000;
 }
 #involved_page .banner_logo {
@@ -653,6 +700,11 @@ select {
 }
 #campaign_page .banner {
   border: 0;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+}
+#campaign_page .main_image {
+  width: 100%;
 }
 #campaign_page .campaign_link {
   width: 100%;
@@ -738,6 +790,23 @@ select {
 #profile_page .campaign_details_right {
   right: 15px;
 }
+/* PROFILE ANONYMOUS ******************************/
+#profile_anonymous_page .scroll_wrapper {
+  background: #efefef;
+}
+#profile_anonymous_page .profile-anon-section {
+  border: solid #fff;
+  margin: 20px 10px;
+  padding: 10px;
+}
+#profile_anonymous_page .profile-anon-section .description {
+  font-size: 16px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+#profile_anonymous_page .profile-anon-section .button {
+  font-size: 20px;
+}
 /* FAQ ******************************/
 #faq_page .scroll_wrapper {
   background: #efefef;
@@ -773,6 +842,46 @@ select {
   background-image: url("../images/list_arrow_down.png");
 }
 /* PRIZES ******************************/
+/* QUIZ ******************************/
+#quiz_page {
+  background: #efefef;
+  padding-top: 45px;
+}
+#quiz_page .button {
+  font-size: 20px;
+  margin: 20px 10px;
+}
+#quiz_page .description {
+  font-size: 16px;
+  margin: 10px;
+  padding: 0 10px;
+  text-align: center;
+}
+#quiz_page .cause-options-inner {
+  float: left;
+  margin-right: -30000px;
+}
+#quiz_page .cause-options-inner img {
+  background-image: url("../images/cause_blue_bg.png");
+  background-size: 100px;
+  float: left;
+  height: 100px;
+  margin: 10px;
+  width: 100px;
+}
+#quiz_page .cause-options-inner img.selected {
+  background-image: url("../images/cause_yellow_bg.png");
+}
+#quiz_page .cause-options-outer {
+  margin: 0 auto;
+  overflow: auto;
+}
+#quiz_page .cause-selections {
+  border: solid #fff;
+  font-size: 16px;
+  margin: 10px;
+  padding: 10px;
+}
 /* SETTINGS ******************************/
 #settings_page {
   position: absolute;

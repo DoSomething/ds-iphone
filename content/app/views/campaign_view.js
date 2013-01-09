@@ -5,12 +5,12 @@ module.exports = View.extend({
   id: 'campaign-view',
   template: template,
   events: {
-	//	"tap #challenges_banner":"campaignChallengesBanner",
+		"tap #challenges_banner":"campaignChallengesBanner",
 		"tap #faq_banner":"campaignFaqBrowser",
-	//	"tap #gallery_banner":"campaignGalleryBrowser",
-	//	"tap #howto_banner":"campaignHowtoBrowser",
-		"tap #prizes_banner":"campaignPrizesBrowser"
-	//	"tap #resources_banner":"campaignResourceBrowser"
+		"tap #gallery_banner":"campaignGalleryBrowser",
+		"tap #howto_banner":"campaignHowtoBrowser",
+		"tap #prizes_banner":"campaignPrizesBrowser",
+		"tap #resources_banner":"campaignResourceBrowser"
 	},
    
   initialize: function() {
@@ -28,10 +28,23 @@ module.exports = View.extend({
   	var scroll = new iScroll('wrapperCampaign');
   },
 	
+	campaignChallengesBanner:function(){	
+		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	},
 	campaignFaqBrowser:function(){	
+		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+		alert(data.id);
+	},
+	campaignGalleryBrowser:function(){	
+		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	},
+	campaignHowtoBrowser:function(){	
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
 	},
 	campaignPrizesBrowser:function(){	
+		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
+	},
+	campaignResourceBrowser:function(){	
 		cordova.exec("ChildBrowserCommand.showWebPage", "http://pics4pets.herokuapp.com/faq.html" );
 	}
 

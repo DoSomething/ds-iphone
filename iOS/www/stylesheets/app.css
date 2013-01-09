@@ -239,6 +239,46 @@ input[type="submit"] {
   background: -webkit-linear-gradient(top, #fafafa 0%, #bcbcbc 100%);
   border: 1px solid #ccc;
 }
+#faq_page .question_wrapper {
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid #000;
+}
+#faq_page .question {
+  float: left;
+  padding: 8px 0 0 10px;
+  font-size: 20px;
+  line-height: 32px;
+  width: 86%;
+  height: 40px;
+  color: #000;
+}
+#faq_page .answer {
+  font-size: 18px;
+  line-height: 24px;
+  padding: 8px 15px;
+  background: #efefef;
+  border-bottom: 2px solid #000;
+  display: none;
+}
+#faq_page .item_arrow {
+  top: 15px;
+}
+#faq_page .item_arrow_active {
+  background-image: url("images/list_arrow_down.png");
+}
+.item_arrow {
+  position: absolute;
+  top: 24px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  background-image: url("images/list_arrow.png");
+  background-size: contain;
+}
+.faq_item {
+  width: 100%;
+}
 .disabled_button {
   color: #999;
 }
