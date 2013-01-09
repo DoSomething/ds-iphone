@@ -1525,10 +1525,38 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
 window.require.define({"views/templates/gallery": function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n			<div class=\"galleryItem\" data-url=\"";
+    foundHelper = helpers.image_item;
+    stack1 = foundHelper || depth0.image_item;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "image_item.image", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\" style=\"background-image:url(";
+    foundHelper = helpers.image_item;
+    stack1 = foundHelper || depth0.image_item;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.thumbnail);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "image_item.thumbnail", { hash: {} }); }
+    buffer += escapeExpression(stack1) + ")\"></div>\n			";
+    return buffer;}
 
-    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">Gallery</div>\n</div>\n\n<div id=\"gallery_page\" class=\"content_wrapper\">\n	<div id=\"wrapperGallery\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n\n		</div>\n	</div>\n</div>";});
+    buffer += "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">Gallery</div>\n</div>\n\n<div id=\"gallery_page\" class=\"content_wrapper\">\n	<div id=\"wrapperGallery\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			";
+    foundHelper = helpers.image_items;
+    stack1 = foundHelper || depth0.image_items;
+    stack2 = helpers.each;
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n			<div class=\"clear\"></div>\n		</div>\n	</div>\n</div>";
+    return buffer;});
 }});
 
 window.require.define({"views/templates/home": function(exports, require, module) {
