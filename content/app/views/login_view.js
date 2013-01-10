@@ -36,7 +36,7 @@ module.exports = View.extend({
       },
 
       success: function(data) {
-        Application.loginView.finishLogin();
+        Application.loginView.finishLogin(data);
       },
     });
   },
@@ -77,16 +77,44 @@ module.exports = View.extend({
       },
 
       success: function(data) {
-        Application.loginView.finishLogin();
+        Application.loginView.finishLogin(data);
       },
     });
   },
 
   // Save logged_in var and navigate to profile screen
-  finishLogin: function() {
-    window.localStorage.setItem("user_logged_in","true");
+  finishLogin: function(data) {
+    window.localStorage.setItem('user_logged_in','true');
 
-    Application.router.navigate("#profile", {trigger: true});
+    // Parse through gids looking for campaigns the user's already signed up for
+    var campaigns = Application.involvedView.campaignList.campaignJSON.campaigns;
+    for (var i = 0; i < data.user.group_audience.und.length; i++) {
+      var gid = data.user.group_audience.und[i].gid;
+
+      // Check if gid is in campaigns list
+      for (var j = 0; j < campaigns.length; j++) {
+        if (campaigns[j].campaign.gid == gid) {
+
+          // Found matching gid. Add to profile collection.
+          var profileItemData = {
+            gid: gid,
+            campaign: campaigns[j].campaign,
+            challenges: campaigns[j].challenges,
+            numChallenges: campaigns[j].challenges.length,
+          };
+
+          Application.profile.update(profileItemData, {remove: false});
+
+          break;
+        }
+      }
+    }
+
+    // Saves profile data to LocalStorage
+    Application.profile.saveToLocalStorage();
+
+    // Change back to the Profile screen
+    Application.router.navigate('#profile', {trigger: true});
     $('#profile_tab').addClass('tab_wrapper_active');
 
     alert('Login successful.');

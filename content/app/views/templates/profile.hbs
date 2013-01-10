@@ -1,25 +1,21 @@
 <div id="header">
-	<div id="header_title" class="title">Profile</div>
+  <div id="header_title" class="title">Profile</div>
 </div>
 
 <div id="profile_page" class="content_wrapper">
-	<div id="wrapper2" class="scroll_wrapper">
-		<div id="scroller">
-			<div class="campaign_item">
-				<div class="campaign_name">Campaign Name 1</div>
-				<div class="campaign_details_left">Completed: 2 of 7</div>
-				<div class="campaign_details_right">Ends: 09/15/12</div>
-			</div>
-			<div class="campaign_item">
-				<div class="campaign_name">Campaign Name 1</div>
-				<div class="campaign_details_left">Completed: 2 of 7</div>
-				<div class="campaign_details_right">Ends: 09/15/12</div>
-			</div>
-			<div class="campaign_item">
-				<div class="campaign_name">Campaign Name 1</div>
-				<div class="campaign_details_left">Completed: 2 of 7</div>
-				<div class="campaign_details_right">Ends: 09/15/12</div>
-			</div>
-		</div>
-	</div>
+  <div id="wrapper2" class="scroll_wrapper">
+    <div id="scroller">
+
+      {{#each models}}
+
+      <div data-id="{{ id }}" class="campaign_item">
+        <div class="campaign_name">{{attributes.campaign.campaign-name}}</div>
+        <div class="campaign_details_left">Completed: {{attributes.challengesCompleted}} of {{attributes.numChallenges}}</div>
+        <div class="campaign_details_right">Ends: {{attributes.campaign.end-date}}</div>
+      </div>
+
+      {{/each}}
+
+    </div>
+  </div>
 </div>

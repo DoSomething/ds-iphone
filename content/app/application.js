@@ -11,6 +11,12 @@ Application = {
 			window.localStorage.setItem('user_logged_in','false');
 		}
 
+    // Models
+    var Profile = require('models/profile');
+
+    this.profile = new Profile();
+
+    // Views
 		var LoginView = require('views/login_view');
 		var LoginRegisterView = require('views/login_register_view');
 		var InvolvedView = require('views/involved_view');

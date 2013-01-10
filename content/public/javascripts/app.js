@@ -88,6 +88,12 @@ window.require.define({"application": function(exports, require, module) {
   			window.localStorage.setItem('user_logged_in','false');
   		}
 
+      // Models
+      var Profile = require('models/profile');
+
+      this.profile = new Profile();
+
+      // Views
   		var LoginView = require('views/login_view');
   		var LoginRegisterView = require('views/login_register_view');
   		var InvolvedView = require('views/involved_view');
@@ -383,6 +389,50 @@ window.require.define({"models/model": function(exports, require, module) {
     
   });
   
+}});
+
+window.require.define({"models/profile": function(exports, require, module) {
+  var ProfileItem = require('./profileItem');
+
+  module.exports = Backbone.Collection.extend({
+
+    model: ProfileItem,
+
+    initialize: function() {
+      this.reset();
+
+      // Populate with saved data from LocalStorage if any
+      var savedSerializedData = window.localStorage.getItem('profile');
+      if (savedSerializedData) {
+        var deserialized = JSON.parse(savedSerializedData);
+        this.add(deserialized);
+      }
+    },
+
+    comparator: function(item) {
+      return item.get('gid');
+    },
+
+    saveToLocalStorage: function() {
+      var serialized = JSON.stringify(this.toJSON());
+      window.localStorage.setItem('profile', serialized);
+    },
+
+
+  });
+}});
+
+window.require.define({"models/profileItem": function(exports, require, module) {
+  module.exports = Backbone.Model.extend({
+
+    idAttribute: 'gid',
+
+    defaults: {
+      'challengesCompleted': 0,
+      'numChallenges': 0,
+    },
+
+  });
 }});
 
 window.require.define({"views/about_view": function(exports, require, module) {
@@ -807,8 +857,7 @@ window.require.define({"views/login_view": function(exports, require, module) {
         },
 
         success: function(data) {
-          console.log(data);
-          Application.loginView.finishLogin();
+          Application.loginView.finishLogin(data);
         },
       });
     },
@@ -849,16 +898,44 @@ window.require.define({"views/login_view": function(exports, require, module) {
         },
 
         success: function(data) {
-          Application.loginView.finishLogin();
+          Application.loginView.finishLogin(data);
         },
       });
     },
 
     // Save logged_in var and navigate to profile screen
-    finishLogin: function() {
-      window.localStorage.setItem("user_logged_in","true");
+    finishLogin: function(data) {
+      window.localStorage.setItem('user_logged_in','true');
 
-      Application.router.navigate("#profile", {trigger: true});
+      // Parse through gids looking for campaigns the user's already signed up for
+      var campaigns = Application.involvedView.campaignList.campaignJSON.campaigns;
+      for (var i = 0; i < data.user.group_audience.und.length; i++) {
+        var gid = data.user.group_audience.und[i].gid;
+
+        // Check if gid is in campaigns list
+        for (var j = 0; j < campaigns.length; j++) {
+          if (campaigns[j].campaign.gid == gid) {
+
+            // Found matching gid. Add to profile collection.
+            var profileItemData = {
+              gid: gid,
+              campaign: campaigns[j].campaign,
+              challenges: campaigns[j].challenges,
+              numChallenges: campaigns[j].challenges.length,
+            };
+
+            Application.profile.update(profileItemData, {remove: false});
+
+            break;
+          }
+        }
+      }
+
+      // Saves profile data to LocalStorage
+      Application.profile.saveToLocalStorage();
+
+      // Change back to the Profile screen
+      Application.router.navigate('#profile', {trigger: true});
       $('#profile_tab').addClass('tab_wrapper_active');
 
       alert('Login successful.');
@@ -925,31 +1002,24 @@ window.require.define({"views/profile_view": function(exports, require, module) 
     id: 'profile-view',
     template: template,
     events: {
-  	
-  	
-  	},
+    },
      
     initialize: function() {  
 
-  	
     },
 
-    render: function() {	
-    	//disable taps on tab again
-    	//$('#gallery_tab').unbind();
-  		this.$el.html(this.template(this.getRenderData()));
-  		this.afterRender();
-    	return this;
+    render: function() {
+      this.$el.html(this.template(Application.profile));
+      this.afterRender();
+      return this;
     },
 
     enableScroll:function(){
-    	var scroll = new iScroll('wrapper2');
+      var scroll = new iScroll('wrapper2');
     },
 
     afterRender: function() {
-  	
-  	
-  	}
+    }
 
   });
   
@@ -1700,10 +1770,57 @@ window.require.define({"views/templates/loginSplash": function(exports, require,
 window.require.define({"views/templates/profile": function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", stack1, stack2, foundHelper, tmp1, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
+  function program1(depth0,data) {
+    
+    var buffer = "", stack1;
+    buffer += "\n\n      <div data-id=\"";
+    foundHelper = helpers.id;
+    stack1 = foundHelper || depth0.id;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "id", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "\" class=\"campaign_item\">\n        <div class=\"campaign_name\">";
+    foundHelper = helpers.attributes;
+    stack1 = foundHelper || depth0.attributes;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['campaign-name']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "attributes.campaign.campaign-name", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n        <div class=\"campaign_details_left\">Completed: ";
+    foundHelper = helpers.attributes;
+    stack1 = foundHelper || depth0.attributes;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.challengesCompleted);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "attributes.challengesCompleted", { hash: {} }); }
+    buffer += escapeExpression(stack1) + " of ";
+    foundHelper = helpers.attributes;
+    stack1 = foundHelper || depth0.attributes;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.numChallenges);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "attributes.numChallenges", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n        <div class=\"campaign_details_right\">Ends: ";
+    foundHelper = helpers.attributes;
+    stack1 = foundHelper || depth0.attributes;
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.campaign);
+    stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1['end-date']);
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "attributes.campaign.end-date", { hash: {} }); }
+    buffer += escapeExpression(stack1) + "</div>\n      </div>\n\n      ";
+    return buffer;}
 
-    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n			<div class=\"campaign_item\">\n				<div class=\"campaign_name\">Campaign Name 1</div>\n				<div class=\"campaign_details_left\">Completed: 2 of 7</div>\n				<div class=\"campaign_details_right\">Ends: 09/15/12</div>\n			</div>\n		</div>\n	</div>\n</div>";});
+    buffer += "<div id=\"header\">\n  <div id=\"header_title\" class=\"title\">Profile</div>\n</div>\n\n<div id=\"profile_page\" class=\"content_wrapper\">\n  <div id=\"wrapper2\" class=\"scroll_wrapper\">\n    <div id=\"scroller\">\n\n      ";
+    foundHelper = helpers.models;
+    stack1 = foundHelper || depth0.models;
+    stack2 = helpers.each;
+    tmp1 = self.program(1, program1, data);
+    tmp1.hash = {};
+    tmp1.fn = tmp1;
+    tmp1.inverse = self.noop;
+    stack1 = stack2.call(depth0, stack1, tmp1);
+    if(stack1 || stack1 === 0) { buffer += stack1; }
+    buffer += "\n\n    </div>\n  </div>\n</div>";
+    return buffer;});
 }});
 
 window.require.define({"views/templates/profile_anonymous": function(exports, require, module) {

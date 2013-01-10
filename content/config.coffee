@@ -15,7 +15,7 @@ exports.config =
           'vendor/scripts/jquery.mobile-1.1.1.js'
           'vendor/scripts/underscore-1.3.3.js',
           'vendor/scripts/backbone/json2.js',
-          'vendor/scripts/backbone/backbone-0.9.2.js',
+          'vendor/scripts/backbone/backbone-0.9.9.js',
           'vendor/scripts/backbone/backstack.js'
     
         ]
