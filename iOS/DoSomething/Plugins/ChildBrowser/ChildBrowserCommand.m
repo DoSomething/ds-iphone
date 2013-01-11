@@ -35,11 +35,13 @@
      NSArray* supportedOrientations = [strOrientations componentsSeparatedByString:@","];
      */
 
-    [self.viewController presentModalViewController:childBrowser animated:YES];
+    if (self.viewController.modalViewController == nil) {
+        [self.viewController presentModalViewController:childBrowser animated:YES];
 
-    NSString* url = (NSString*)[arguments objectAtIndex:0];
+        NSString* url = (NSString*)[arguments objectAtIndex:0];
 
-    [self.childBrowser loadURL:url];
+        [self.childBrowser loadURL:url];
+    }
 }
 
 - (void)getPage:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options

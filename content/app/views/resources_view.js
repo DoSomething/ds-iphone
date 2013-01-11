@@ -22,7 +22,7 @@ module.exports = View.extend({
 	
 	openLink:function(e) {
 		var childURL = $(e.currentTarget).data('url');
-		cordova.exec("ChildBrowserCommand.showWebPage", childURL);
+		window.plugins.childBrowser.showWebPage(childURL);
 	}
 
 });

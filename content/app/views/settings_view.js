@@ -31,13 +31,13 @@ module.exports = View.extend({
 	causes: function() {
 		
 	},
+	
 	terms: function() {
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
-		
+		window.plugins.childBrowser.showWebPage('http://www.dosomething.org/about/terms-of-service');
 	},
+
 	privacy: function() {
-		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
-		
+		window.plugins.childBrowser.showWebPage('http://www.dosomething.org/about/privacy');
 	},
 
 	logout: function(e) {

@@ -550,32 +550,35 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   			},500);
   		},
 
-  		campaignChallenges:function() {		
-  			Application.actionsView.item = this.item;  
-  			Application.router.navigate("#actions", {trigger: true});
-  		},
+    campaignChallenges:function() {
+      Application.actionsView.item = this.item;  
+      Application.router.navigate("#actions", {trigger: true});
+    },
 
-  		campaignHowto:function() {	
-  			Application.howToView.item = this.item;  
-  			Application.router.navigate("#howto", {trigger: true}); 
-  		},
+    campaignHowto:function() {	
+      Application.howToView.item = this.item;  
+      Application.router.navigate("#howto", {trigger: true}); 
+    },
 
-  		campaignFaqBrowser:function(){	
-  			cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
-  		},
-  		campaignGallery:function(){	
-  			Application.galleryView.item = this.item;  
-  			Application.router.navigate("#gallery", {trigger: true});
-  		},
-  		campaignPrizesBrowser:function(){	
-  			cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
-  		},
-  		campaignResources:function(){	
-  			Application.resourcesView.item = this.item;
-  			Application.router.navigate("#resources", {trigger: true}); 
-  		}
+    campaignFaqBrowser:function(e) {
+      window.plugins.childBrowser.showWebPage(this.item['faq-ios'].url);
+    },
 
-  	});
+    campaignGallery:function() {
+      Application.galleryView.item = this.item;
+      Application.router.navigate("#gallery", {trigger: true});
+    },
+
+    campaignPrizesBrowser:function(e) {
+      window.plugins.childBrowser.showWebPage(this.item['prizes'].url);
+    },
+    
+    campaignResources:function(e) {	
+      Application.resourcesView.item = this.item;
+      Application.router.navigate("#resources", {trigger: true});
+    }
+
+  });
   
 }});
 
@@ -1234,7 +1237,7 @@ window.require.define({"views/resources_view": function(exports, require, module
   	
   	openLink:function(e) {
   		var childURL = $(e.currentTarget).data('url');
-  		cordova.exec("ChildBrowserCommand.showWebPage", childURL);
+  		window.plugins.childBrowser.showWebPage(childURL);
   	}
 
   });
@@ -1419,13 +1422,13 @@ window.require.define({"views/settings_view": function(exports, require, module)
   	causes: function() {
   		
   	},
+  	
   	terms: function() {
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
-  		
+  		window.plugins.childBrowser.showWebPage('http://www.dosomething.org/about/terms-of-service');
   	},
+
   	privacy: function() {
-  		cordova.exec("ChildBrowserCommand.showWebPage", "http://www.google.com");
-  		
+  		window.plugins.childBrowser.showWebPage('http://www.dosomething.org/about/privacy');
   	},
 
   	logout: function(e) {
