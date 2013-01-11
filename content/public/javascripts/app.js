@@ -383,6 +383,21 @@ window.require.define({"models/collection": function(exports, require, module) {
   
 }});
 
+window.require.define({"models/gallery": function(exports, require, module) {
+  
+  module.exports = Backbone.Model.extend({
+  	
+  	url: 'http://apps.dosomething.org/m_ios_app_api/?q=campaigns',
+  	handle: function(){
+
+  		return { "campaigns": this.toJSON() };
+  		
+  	}
+  		
+  	});
+  
+}});
+
 window.require.define({"models/model": function(exports, require, module) {
   // Base class for all models.
   module.exports = Backbone.Model.extend({
@@ -532,40 +547,42 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   	enableScroll:function(){
   		setTimeout(function(){
   			var wrapperCampaign = new iScroll('wrapperCampaign',{useTransition:true,hScroll:false});
-  		},500);
-  	},
+  			},500);
+  		},
 
-  	campaignChallenges:function() {		
-  		Application.actionsView.item = this.item;  
-      Application.router.navigate("#actions", {trigger: true});
-  	},
-  	
-  	campaignHowto:function() {	
-  		Application.howToView.item = this.item;  
-      Application.router.navigate("#howto", {trigger: true}); 
-  	},
+  		campaignChallenges:function() {		
+  			Application.actionsView.item = this.item;  
+  			Application.router.navigate("#actions", {trigger: true});
+  		},
 
-  	campaignFaqBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
-  	},
-  	campaignGallery:function(){	
-      Application.router.navigate("#gallery", {trigger: true});
-  	},
-  	campaignPrizesBrowser:function(){	
-  		cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
-  	},
-  	campaignResources:function(){	
-  		Application.resourcesView.item = this.item;
-      Application.router.navigate("#resources", {trigger: true}); 
-  	}
+  		campaignHowto:function() {	
+  			Application.howToView.item = this.item;  
+  			Application.router.navigate("#howto", {trigger: true}); 
+  		},
 
-  });
+  		campaignFaqBrowser:function(){	
+  			cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
+  		},
+  		campaignGallery:function(){	
+  			Application.galleryView.item = this.item;  
+  			Application.router.navigate("#gallery", {trigger: true});
+  		},
+  		campaignPrizesBrowser:function(){	
+  			cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
+  		},
+  		campaignResources:function(){	
+  			Application.resourcesView.item = this.item;
+  			Application.router.navigate("#resources", {trigger: true}); 
+  		}
+
+  	});
   
 }});
 
 window.require.define({"views/gallery_view": function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/gallery');
+  var store = {};
 
   module.exports = View.extend({
   	id: 'gallery-view',
@@ -576,14 +593,25 @@ window.require.define({"views/gallery_view": function(exports, require, module) 
   	},
 
   	render: function() {
-  		
-  		// call json, set up append and dataloaded
-  		
-  		this.$el.html(this.template(this.item));
+
+  		$.ajax({
+  			url: this.item.gallery.feed,
+  			type: "GET",
+  			success: function(data) {
+  				store = data;
+  				Application.galleryView.$el.trigger("dataLoaded");
+
+  			},
+  			error: function(textStatus, errorThrown) {
+  				console.log(JSON.stringify(errorThrown));
+  				// Application.router.navigate("#home", {trigger: true});
+  			}
+  		});
   		return this;
   	},
-  	
+
   	append: function() {
+  		this.$el.html(this.template(store));			
   		this.enableScroll();
   	},
 
@@ -593,7 +621,7 @@ window.require.define({"views/gallery_view": function(exports, require, module) 
 
   	openImage:function(e) {	
   		Application.imageView.imageURL = $(e.currentTarget).data('url');
-      Application.router.navigate("#image", {trigger: true});
+  		Application.router.navigate("#image", {trigger: true});
   	}
 
   });

@@ -22,31 +22,32 @@ module.exports = View.extend({
 	enableScroll:function(){
 		setTimeout(function(){
 			var wrapperCampaign = new iScroll('wrapperCampaign',{useTransition:true,hScroll:false});
-		},500);
-	},
+			},500);
+		},
 
-	campaignChallenges:function() {		
-		Application.actionsView.item = this.item;  
-    Application.router.navigate("#actions", {trigger: true});
-	},
-	
-	campaignHowto:function() {	
-		Application.howToView.item = this.item;  
-    Application.router.navigate("#howto", {trigger: true}); 
-	},
+		campaignChallenges:function() {		
+			Application.actionsView.item = this.item;  
+			Application.router.navigate("#actions", {trigger: true});
+		},
 
-	campaignFaqBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
-	},
-	campaignGallery:function(){	
-    Application.router.navigate("#gallery", {trigger: true});
-	},
-	campaignPrizesBrowser:function(){	
-		cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
-	},
-	campaignResources:function(){	
-		Application.resourcesView.item = this.item;
-    Application.router.navigate("#resources", {trigger: true}); 
-	}
+		campaignHowto:function() {	
+			Application.howToView.item = this.item;  
+			Application.router.navigate("#howto", {trigger: true}); 
+		},
 
-});
+		campaignFaqBrowser:function(){	
+			cordova.exec("ChildBrowserCommand.showWebPage", this.item['faq-ios'].url);
+		},
+		campaignGallery:function(){	
+			Application.galleryView.item = this.item;  
+			Application.router.navigate("#gallery", {trigger: true});
+		},
+		campaignPrizesBrowser:function(){	
+			cordova.exec("ChildBrowserCommand.showWebPage", this.item['prizes'].url);
+		},
+		campaignResources:function(){	
+			Application.resourcesView.item = this.item;
+			Application.router.navigate("#resources", {trigger: true}); 
+		}
+
+	});
