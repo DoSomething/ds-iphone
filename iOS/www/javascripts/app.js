@@ -691,9 +691,7 @@ window.require.define({"views/image_view": function(exports, require, module) {
   	},
   	render: function(){
   		imagedata = {imageURL:this.imageURL};
-  		console.log(imagedata);
-  		Application.imageView.$el.trigger("dataLoaded");
-  		
+  		this.append();
   	},
   	
   	append: function() {

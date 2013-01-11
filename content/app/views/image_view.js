@@ -11,9 +11,7 @@ module.exports = View.extend({
 	},
 	render: function(){
 		imagedata = {imageURL:this.imageURL};
-		console.log(imagedata);
-		Application.imageView.$el.trigger("dataLoaded");
-		
+		this.append();
 	},
 	
 	append: function() {
