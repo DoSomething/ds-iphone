@@ -589,7 +589,7 @@ window.require.define({"views/gallery_view": function(exports, require, module) 
   	template: template,
   	events: {
   		"dataLoaded":"append",
-  		"tap .gallery_thumbnail":"openImage"
+  		"tap .galleryItem":"openImage"
   	},
 
   	render: function() {
@@ -677,13 +677,26 @@ window.require.define({"views/howto_view": function(exports, require, module) {
 window.require.define({"views/image_view": function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/image');
+  var imagedata = {};
 
   module.exports = View.extend({
   	id: 'image-view',
   	template: template,
+  	cache: false,
   	events: {
+  		"dataLoaded":"append"
   	},
-
+  	render: function(){
+  		imagedata = {imageURL:this.imageURL};
+  		console.log(imagedata);
+  		Application.imageView.$el.trigger("dataLoaded");
+  		
+  	},
+  	
+  	append: function() {
+  		this.$el.html(this.template(imagedata));			
+  	},
+  	
   	afterRender: function() {
   		$('#theimage').attr('src',Application.imageView.imageURL);
   	},
@@ -1721,10 +1734,16 @@ window.require.define({"views/templates/howto": function(exports, require, modul
 window.require.define({"views/templates/image": function(exports, require, module) {
   module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
     helpers = helpers || Handlebars.helpers;
-    var foundHelper, self=this;
+    var buffer = "", stack1, foundHelper, self=this, functionType="function", helperMissing=helpers.helperMissing, undef=void 0, escapeExpression=this.escapeExpression;
 
 
-    return "<div id=\"header\">\n	<div id=\"header_title\" class=\"title\">Gallery</div>\n</div>\n\n<div id=\"image_page\" class=\"content_wrapper\">\n	<img id=\"theimage\" class=\"gallery_full_image\">\n</div>";});
+    buffer += "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">Gallery</div>\n</div>\n\n<div id=\"image_page\" class=\"content_wrapper\">\n	<img id=\"theimage\" class=\"gallery_full_image\" style=\"background-image:url( ";
+    foundHelper = helpers.imageURL;
+    stack1 = foundHelper || depth0.imageURL;
+    if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
+    else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "imageURL", { hash: {} }); }
+    buffer += escapeExpression(stack1) + " )\">\n\n</div>\n";
+    return buffer;});
 }});
 
 window.require.define({"views/templates/involved": function(exports, require, module) {

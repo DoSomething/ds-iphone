@@ -7,7 +7,7 @@ module.exports = View.extend({
 	template: template,
 	events: {
 		"dataLoaded":"append",
-		"tap .gallery_thumbnail":"openImage"
+		"tap .galleryItem":"openImage"
 	},
 
 	render: function() {
