@@ -41,3 +41,8 @@ Thumbs.db
 # XCode #
 #########
 xcuserdata
+
+/content/.DS_Store
+/content/app/.DS_Store
+/content/app/views/.DS_Store
+/content/app/views/templates/.DS_Store

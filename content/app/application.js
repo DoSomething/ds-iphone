@@ -19,6 +19,7 @@ Application = {
     // Views
 		var LoginView = require('views/login_view');
 		var LoginRegisterView = require('views/login_register_view');
+		var CampaignRegisterView = require('views/campaign_register_view');
 		var InvolvedView = require('views/involved_view');
 		var SettingsView = require('views/settings_view');
 		var ProfileView = require('views/profile_view');
@@ -36,6 +37,7 @@ Application = {
     this.baseURL = 'https://www.dosomething.org/';
     this.loginView = new LoginView();
     this.loginRegisterView = new LoginRegisterView();
+    this.campaignRegisterView = new CampaignRegisterView();
     this.involvedView = new InvolvedView();
     this.settingsView = new SettingsView();
     this.profileView = new ProfileView();

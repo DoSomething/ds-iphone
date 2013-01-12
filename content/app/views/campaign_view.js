@@ -10,7 +10,8 @@ module.exports = View.extend({
 		"tap #gallery_banner":"campaignGallery",
 		"tap #howto_banner":"campaignHowto",
 		"tap #prizes_banner":"campaignPrizesBrowser",
-		"tap #resources_banner":"campaignResources"
+		"tap #resources_banner":"campaignResources",
+		"tap #signup":"signup"
 	},
 
 	render: function() {
@@ -28,6 +29,11 @@ module.exports = View.extend({
   campaignChallenges:function() {
     Application.actionsView.item = this.item;  
     Application.router.navigate("#actions", {trigger: true});
+  },
+
+  signup:function() {	
+//passwhatever variable the server needs
+    Application.router.navigate("#campaign_register", {trigger: true}); 
   },
 
   campaignHowto:function() {	

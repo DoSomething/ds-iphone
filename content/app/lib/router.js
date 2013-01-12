@@ -10,6 +10,7 @@ module.exports = Backbone.Router.extend({
 		'session':'session',
 		'login':'login',
 		'login_register':'login_register',
+		'campaign_register':'campaign_register',
 		'quiz':'quiz',
 		'actions':'actions',
 		'howto':'howto',
@@ -51,6 +52,9 @@ module.exports = Backbone.Router.extend({
 	login_register:function() {
 		this.changePage(Application.loginRegisterView);
 		Application.loginRegisterView.enableScroll();
+	},
+	campaign_register:function() {
+		this.changePage(Application.campaignRegisterView);
 	},
 	involved:function() {
 		this.changePage(Application.involvedView);

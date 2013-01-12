@@ -96,6 +96,7 @@ window.require.define({"application": function(exports, require, module) {
       // Views
   		var LoginView = require('views/login_view');
   		var LoginRegisterView = require('views/login_register_view');
+  		var CampaignRegisterView = require('views/campaign_register_view');
   		var InvolvedView = require('views/involved_view');
   		var SettingsView = require('views/settings_view');
   		var ProfileView = require('views/profile_view');
@@ -113,6 +114,7 @@ window.require.define({"application": function(exports, require, module) {
       this.baseURL = 'https://www.dosomething.org/';
       this.loginView = new LoginView();
       this.loginRegisterView = new LoginRegisterView();
+      this.campaignRegisterView = new CampaignRegisterView();
       this.involvedView = new InvolvedView();
       this.settingsView = new SettingsView();
       this.profileView = new ProfileView();
@@ -224,6 +226,7 @@ window.require.define({"lib/router": function(exports, require, module) {
   		'session':'session',
   		'login':'login',
   		'login_register':'login_register',
+  		'campaign_register':'campaign_register',
   		'quiz':'quiz',
   		'actions':'actions',
   		'howto':'howto',
@@ -265,6 +268,9 @@ window.require.define({"lib/router": function(exports, require, module) {
   	login_register:function() {
   		this.changePage(Application.loginRegisterView);
   		Application.loginRegisterView.enableScroll();
+  	},
+  	campaign_register:function() {
+  		this.changePage(Application.campaignRegisterView);
   	},
   	involved:function() {
   		this.changePage(Application.involvedView);
@@ -522,6 +528,59 @@ window.require.define({"views/actions_view": function(exports, require, module) 
   
 }});
 
+window.require.define({"views/campaign_register_view": function(exports, require, module) {
+  var View = require('./view');
+  var template = require('./templates/campaignRegister');
+
+  module.exports = View.extend({
+  	id: 'campaign-register-view',
+  	template: template,
+  	events: {
+  		'submit #registerForm': 'loginRegisterSubmit',
+  	},
+
+  	enableScroll:function(){
+  		setTimeout(function(){
+  			var scroll = new iScroll('wrapper2');
+  			},500);
+  		},
+
+  		loginRegisterSubmit: function(e) {
+  			e.preventDefault();
+
+  			var email = $('input[name=email]').val();
+  			var cell = $('input[name=cell]').val();
+
+
+  			var data = {
+  				"name": email,
+  				"cell": cell
+  			};
+
+  			$.ajax({
+  				url: Application.baseURL + 'rest/user/register.json',
+  				type: 'POST',
+  				data: JSON.stringify(data),
+  				contentType: 'application/json; charset=utf-8',
+  				dataType: 'json',
+
+  				error: function(textStatus, errorThrown) {
+  					alert(JSON.stringify(textStatus));
+  				},
+
+  				success: function(data) {
+  					window.localStorage.setItem("user_logged_in","true");
+  					Application.router.navigate("#profile", {trigger: true});
+
+  					alert('Registration successful.');
+  				}
+  			});
+  		}
+
+  	});
+  
+}});
+
 window.require.define({"views/campaign_view": function(exports, require, module) {
   var View = require('./view');
   var template = require('./templates/campaign');
@@ -535,7 +594,8 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		"tap #gallery_banner":"campaignGallery",
   		"tap #howto_banner":"campaignHowto",
   		"tap #prizes_banner":"campaignPrizesBrowser",
-  		"tap #resources_banner":"campaignResources"
+  		"tap #resources_banner":"campaignResources",
+  		"tap #signup":"signup"
   	},
 
   	render: function() {
@@ -553,6 +613,11 @@ window.require.define({"views/campaign_view": function(exports, require, module)
     campaignChallenges:function() {
       Application.actionsView.item = this.item;  
       Application.router.navigate("#actions", {trigger: true});
+    },
+
+    signup:function() {	
+  //passwhatever variable the server needs
+      Application.router.navigate("#campaign_register", {trigger: true}); 
     },
 
     campaignHowto:function() {	
@@ -1576,7 +1641,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.teaser);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.teaser", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			\n			";
+    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div id=\"signup\" class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			\n			";
     foundHelper = helpers.main;
     stack1 = foundHelper || depth0.main;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
@@ -1649,6 +1714,15 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     if(stack1 || stack1 === 0) { buffer += stack1; }
     buffer += "\n			\n		</div>\n	</div>\n</div>\n";
     return buffer;});
+}});
+
+window.require.define({"views/templates/campaignRegister": function(exports, require, module) {
+  module.exports = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+    helpers = helpers || Handlebars.helpers;
+    var foundHelper, self=this;
+
+
+    return "<div id=\"header\">\n	<div class=\"back_button\"></div>\n	<div id=\"header_title\" class=\"title\">\n		Campaign Signup\n	</div>\n</div>\n\n<div id=\"register_page\" class=\"content_wrapper\">\n	<div id=\"wrapper2\" class=\"scroll_wrapper\">\n		<div id=\"scroller\">\n			<div class=\"little_info\">\n				Thanks for your interest in the campaign!  Sign up for more info!\n			</div>\n			<form id=\"registerForm\">\n				<div class=\"label\">Email</div>\n				<input type=\"email\" name=\"email\" />\n				<div class=\"label\">Cell #</div>\n				<input type=\"tel\" name=\"cell\" />\n\n				<input type=\"submit\" name=\"ds_register\" class=\"button login_button yellow_button active_button\" value=\"Let's Do This\" />\n			</form>\n		</div>\n	</div>\n</div>";});
 }});
 
 window.require.define({"views/templates/gallery": function(exports, require, module) {
