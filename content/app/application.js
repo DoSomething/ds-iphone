@@ -11,6 +11,10 @@ Application = {
 			window.localStorage.setItem('user_logged_in','false');
 		}
 
+		// General configurations to set on app initialization
+		// Setting defaultHomeScroll to 0 as a workaround to the 1 px jitter on page transitions
+		$.mobile.defaultHomeScroll = 0;
+
     // Models
     var Profile = require('models/profile');
 
