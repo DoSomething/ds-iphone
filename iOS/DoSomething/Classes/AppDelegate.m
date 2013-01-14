@@ -28,6 +28,8 @@
 #import "AppDelegate.h"
 #import "Flurry.h"
 #import "MainViewController.h"
+#import "UAirship.h"
+#import "UAPush.h"
 
 #import <Cordova/CDVPlugin.h>
 
@@ -109,6 +111,18 @@
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     
+    // Init Urban Airship launch options
+    NSMutableDictionary *takeOffOptions = [[[NSMutableDictionary alloc] init] autorelease];
+    [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
+    
+    // Create's UA singleton used to talk to UA servers
+    [UAirship takeOff:takeOffOptions];
+    
+    // Register for notifications
+    [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+                                                         UIRemoteNotificationTypeSound |
+                                                         UIRemoteNotificationTypeAlert)];
+    
     // PushNotification - Handle launch from a push notification
     NSDictionary* userInfo = [launchOptions objectForKey:UIApplicationLaunchOptionsRemoteNotificationKey];
     if(userInfo) {
@@ -156,6 +170,9 @@
 {
     PushNotification* pushHandler = [self.viewController getCommandInstance:@"PushNotification"];
     [pushHandler didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    
+    // Update device token and register token with UA
+    [[UAPush shared] registerDeviceToken:deviceToken];
 }
 
 - (void)application:(UIApplication*)app didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
