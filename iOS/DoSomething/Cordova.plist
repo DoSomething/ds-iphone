@@ -76,6 +76,8 @@
 		<string>XtifyCordovaPlugin</string>
 		<key>ChildBrowserCommand</key>
 		<string>ChildBrowserCommand</string>
+		<key>PushNotification</key>
+		<string>PushNotification</string>
 	</dict>
 </dict>
 </plist>
