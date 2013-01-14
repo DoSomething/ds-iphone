@@ -184,31 +184,33 @@ window.require.define({"application": function(exports, require, module) {
 window.require.define({"initialize": function(exports, require, module) {
   var application = require('application');
   window.tapReady = true; 
-                                 
+
   $(function() {
-      $.mobile.ajaxEnabled = false;
-      $.mobile.linkBindingEnabled = false;
-      $.mobile.hashListeningEnabled = false;
-      $.mobile.pushStateEnabled = false;
-       // Remove page from DOM when it's being replaced
-      $('div[data-role="page"]').live('pagehide', function (event, ui) {
-          $(event.currentTarget).remove();
-      });                                            
-    
-  	 document.addEventListener("deviceready",  function() {
-      try{
+  	$.mobile.ajaxEnabled = false;
+  	$.mobile.linkBindingEnabled = false;
+  	$.mobile.hashListeningEnabled = false;
+  	$.mobile.pushStateEnabled = false;
+  	// Remove page from DOM when it's being replaced
+  	$('div[data-role="page"]').live('pagehide', function (event, ui) {
+  		$(event.currentTarget).remove();
+  	});                                            
+
+  	document.addEventListener("deviceready",  function() {
+  		var pushNotification = window.plugins.pushNotification;
+  		try{
 
 
-      }catch(e){
 
-        alert(e.message);  
-      }
+  		}catch(e){
 
-          
-  });
-  	
-    application.initialize();
-    Backbone.history.start();
+  			alert(e.message);  
+  		}
+
+
+  	});
+
+  	application.initialize();
+  	Backbone.history.start();
   });
   
 }});
