@@ -11,7 +11,8 @@ module.exports = View.extend({
 		"tap #howto_banner":"campaignHowto",
 		"tap #prizes_banner":"campaignPrizesBrowser",
 		"tap #resources_banner":"campaignResources",
-		"tap #signup":"signup"
+		"tap #signup":"signup",
+		"tap #reportback":"reportback"
 	},
 
 	render: function() {
@@ -34,6 +35,24 @@ module.exports = View.extend({
   signup:function() {	
 //passwhatever variable the server needs
     Application.router.navigate("#campaign_register", {trigger: true}); 
+  },
+
+  reportback:function() {	
+		filepicker.pickAndStore({
+			mimetype: ['image/*'],
+			location: ['S3'],
+			container: 'window',
+			services:['COMPUTER', 'INSTAGRAM', 'FACEBOOK', 'GOOGLE_DRIVE', 'GMAIL']
+		},
+		function(FPFile){
+			console.log(JSON.stringify(FPFile));
+			var photo_filename = FPFile.filename;
+			var photo_url = FPFile.url;
+		},
+		function(FPError){
+			console.log(FPError.toString());
+		}
+	);
   },
 
   campaignHowto:function() {	

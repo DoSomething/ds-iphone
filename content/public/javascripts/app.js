@@ -601,7 +601,8 @@ window.require.define({"views/campaign_view": function(exports, require, module)
   		"tap #howto_banner":"campaignHowto",
   		"tap #prizes_banner":"campaignPrizesBrowser",
   		"tap #resources_banner":"campaignResources",
-  		"tap #signup":"signup"
+  		"tap #signup":"signup",
+  		"tap #reportback":"reportback"
   	},
 
   	render: function() {
@@ -624,6 +625,24 @@ window.require.define({"views/campaign_view": function(exports, require, module)
     signup:function() {	
   //passwhatever variable the server needs
       Application.router.navigate("#campaign_register", {trigger: true}); 
+    },
+
+    reportback:function() {	
+  		filepicker.pickAndStore({
+  			mimetype: ['image/*'],
+  			location: ['S3'],
+  			container: 'window',
+  			services:['COMPUTER', 'INSTAGRAM', 'FACEBOOK', 'GOOGLE_DRIVE', 'GMAIL']
+  		},
+  		function(FPFile){
+  			console.log(JSON.stringify(FPFile));
+  			var photo_filename = FPFile.filename;
+  			var photo_url = FPFile.url;
+  		},
+  		function(FPError){
+  			console.log(FPError.toString());
+  		}
+  	);
     },
 
     campaignHowto:function() {	
@@ -1647,7 +1666,7 @@ window.require.define({"views/templates/campaign": function(exports, require, mo
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.teaser);
     if(typeof stack1 === functionType) { stack1 = stack1.call(depth0, { hash: {} }); }
     else if(stack1=== undef) { stack1 = helperMissing.call(depth0, "main.teaser", { hash: {} }); }
-    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div id=\"signup\" class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			\n			";
+    buffer += escapeExpression(stack1) + "</p>\n			</div>\n			<div class=\"signUp_wrapper\">\n				<div id=\"signup\" class=\"button yellow_button active_yellow\">Sign Up</div> <!-- toggles to Already Signed Up -->\n			</div>\n			\n			<div class=\"signUp_wrapper\">\n				<div id=\"reportback\" class=\"button yellow_button active_yellow\">Report Back</div> \n			</div>\n			\n			";
     foundHelper = helpers.main;
     stack1 = foundHelper || depth0.main;
     stack1 = (stack1 === null || stack1 === undefined || stack1 === false ? stack1 : stack1.image);
